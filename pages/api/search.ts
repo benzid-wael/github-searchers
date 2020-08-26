@@ -6,9 +6,10 @@ import {sampleData as sampleRepoData} from '../../utils/repo';
 import apiResponse from '../../utils/api';
 
 
+const MINIMUM_SEARCH_TERM_LENGTH = 3;
 const searchGithubRepo = (text: String) => {
   // https://api.github.com/search/repositories?q=django
-  if (text && text.length > 3) {
+  if (text && text.length >= MINIMUM_SEARCH_TERM_LENGTH) {
     return sampleRepoData;
   } else {
     return {}
@@ -17,7 +18,7 @@ const searchGithubRepo = (text: String) => {
 
 const searchGithubUsers = (text: String) => {
   // https://api.github.com/search/users?q=django
-  if (text && text.length > 3) {
+  if (text && text.length >= MINIMUM_SEARCH_TERM_LENGTH) {
     return sampleUsersData;
   } else {
     return {}
@@ -46,7 +47,7 @@ const validatePayload = (payload: {searchType: string, searchText: string}) => {
 
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
   const payload = _req.body;
-  const result = SEARCH_MODE_MAPPINGS[payload.searchType];
+  const result = SEARCH_MODE_MAPPINGS[payload.searchType](payload.searchText);
   res.status(200).json(result);
 };
 
