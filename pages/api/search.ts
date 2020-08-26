@@ -1,40 +1,54 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-
-const HTTP_OK = 200;
-const HTTP_BAD_REQUEST = 400;
-const HTTP_METHOD_NOT_ALLOWED = 405;
-const HTTP_UNPROCESSABLE_ENTITY = 422;
+import { InvalidPayload } from '../../utils/errors';
+import sampleUsersData from '../../utils/users';
+import {sampleData as sampleRepoData} from '../../utils/repo';
+import apiResponse from '../../utils/api';
 
 
 const searchGithubRepo = (text: String) => {
   // https://api.github.com/search/repositories?q=django
+  if (text && text.length > 3) {
+    return sampleRepoData;
+  } else {
+    return {}
+  }
 };
 
 const searchGithubUsers = (text: String) => {
   // https://api.github.com/search/users?q=django
-};
-
-
-const handler = (_req: NextApiRequest, res: NextApiResponse) => {
-  if (_req.method != 'POST') {
-    res.status(HTTP_METHOD_NOT_ALLOWED).json({
-      detail: 'This API expects only POST requests'
-    })
+  if (text && text.length > 3) {
+    return sampleUsersData;
   } else {
-    try {
-      const payload = _req.body;
-      if (!payload.searchType || !payload.searchText) {
-        res.status(HTTP_BAD_REQUEST).json({detail: 'Invalid payload'});
-      } else {
-        res.status(HTTP_OK).json({found: true})
-      }
-    } catch (err) {
-      console.error('Cannot process: ' + _req.body);
-      res.status(HTTP_UNPROCESSABLE_ENTITY).json({detail: 'This API expects json payload'})
-    }
+    return {}
   }
 };
 
 
-export default handler;
+const SEARCH_MODE_MAPPINGS: {[key: string]: (value: string) => any} = {
+  "repository": searchGithubRepo,
+  "user": searchGithubUsers,
+};
+
+
+const validatePayload = (payload: {searchType: string, searchText: string}) => {
+  if (!payload.searchType || !payload.searchText) {
+    throw new InvalidPayload('Invalid schema');
+  }
+  if (!SEARCH_MODE_MAPPINGS[payload.searchType]) {
+    throw new InvalidPayload('Unsupported search type: ' + payload.searchType);
+  }
+};
+
+
+
+
+
+const handler = (_req: NextApiRequest, res: NextApiResponse) => {
+  const payload = _req.body;
+  const result = SEARCH_MODE_MAPPINGS[payload.searchType];
+  res.status(200).json(result);
+};
+
+
+export default apiResponse(["POST"], validatePayload)(handler);

@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
+import React  from 'react'
 import styled from 'styled-components';
 
 import Layout from '../components/Layout'
@@ -58,15 +57,15 @@ const IndexPage = () => {
         <Search/>
 
         <FlexGrid>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
         </FlexGrid>
       </WrapperContainer>
     </MainContainer>

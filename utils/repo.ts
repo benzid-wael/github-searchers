@@ -3015,4 +3015,7 @@ export const sampleData = {
       "score": 1.0
     }
   ]
-}
+};
+
+
+export default sampleData;

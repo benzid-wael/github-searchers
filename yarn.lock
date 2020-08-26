@@ -1074,6 +1074,14 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/hoist-non-react-statics@*":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/json-schema@^7.0.4":
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
@@ -1096,12 +1104,29 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-native@*":
+  version "0.63.10"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.10.tgz#89234ace2f6a2b0ada4d902cc81fcdd973088596"
+  integrity sha512-9ZbfoWJFbxv7FVPTK7/Y8yRRViJ0bu62p3yKgeK3KqQmBKqQR14nvbIqBHkbBS1mtSWfGgBkPtxI2pmJni4VWQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.9.16":
   version "16.9.47"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.47.tgz#fb092936f0b56425f874d0ff1b08051fdf70c1ba"
   integrity sha512-dAJO4VbrjYqTUwFiQqAKjLyHHl4RSTNnRyPdX3p16MPbDKvow51wxATUPxoe2QsiXNMEYrOjc2S6s92VjG+1VQ==
   dependencies:
     "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/styled-components@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.2.tgz#652af475b4af917b355ea1c3068acae63d46455f"
+  integrity sha512-HNocYLfrsnNNm8NTS/W53OERSjRA8dx5Bn6wBd2rXXwt4Z3s+oqvY6/PbVt3e6sgtzI63GX//WiWiRhWur08qQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "*"
+    "@types/react" "*"
+    "@types/react-native" "*"
     csstype "^3.0.2"
 
 "@webassemblyjs/ast@1.9.0":
@@ -2730,7 +2755,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
