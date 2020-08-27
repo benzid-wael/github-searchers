@@ -19,7 +19,7 @@ export class MethodNotAllowed extends ApiError {
 
   constructor(public message: string) {
     super(message);
-    this.name = "ApiError";
+    this.name = "MethodNotAllowed";
     this.stack = (<any> new Error()).stack;
   }
 }
@@ -30,7 +30,18 @@ export class InvalidPayload extends ApiError {
 
   constructor(public message: string) {
     super(message);
-    this.name = "ApiError";
+    this.name = "InvalidPayload";
+    this.stack = (<any> new Error()).stack;
+  }
+}
+
+
+export class PreconditionFailed extends ApiError {
+  static statusCode = 412;
+
+  constructor(public message: string) {
+    super(message);
+    this.name = "PreconditionFailed";
     this.stack = (<any> new Error()).stack;
   }
 }

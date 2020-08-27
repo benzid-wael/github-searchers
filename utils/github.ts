@@ -46,7 +46,7 @@ abstract class BaseGithubClient {
         nextPage: resp.nextPage,
         totalPages: resp.totalPages
       },
-      items: response.body.items.map(item => (<Repository>{
+      items: response.items.map(item => (<Repository>{
         name: item.name,
         repositoryUrl: item.html_url,
         createdAt: item.created_at,
@@ -73,7 +73,7 @@ abstract class BaseGithubClient {
         nextPage: resp.nextPage,
         totalPages: resp.totalPages
       },
-      items: response.body.items.map(item => (<User>{
+      items: response.items.map(item => (<User>{
         name: item.login,
         avatarUrl: item.avatar_url,
         url: item.html_url
@@ -98,3 +98,12 @@ export class FakeGithubClient extends BaseGithubClient {
   };
 }
 
+
+export class GithubClientFactory {
+  static get client() {
+    if (process.env.USE_FAKE_CLIENT && process.env.USE_FAKE_CLIENT == '1') {
+      return new FakeGithubClient();
+    }
+    return new FakeGithubClient();
+  }
+}

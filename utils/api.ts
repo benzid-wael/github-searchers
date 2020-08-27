@@ -4,9 +4,18 @@ import {ApiError, MethodNotAllowed} from "./errors";
 export type HTTP_METHOD = "HEAD" | "GET" | "POST" | "PUT" | "DELETE";
 
 
+const handleError = (res, err) => {
+  if (err instanceof ApiError) {
+    res.status(err.status).json({detail: err.message});
+  } else {
+    res.status(500).json({detail: err.toString()})
+  }
+};
+
+
 export const apiResponse = (allowedMethods: HTTP_METHOD[], validator?: (payload: any) => void) => {
 
-  const wrapper = handler => {
+  const wrapper = (handler) => {
     return (req: NextApiRequest, res: NextApiResponse) => {
       try {
         // Check http method
@@ -19,13 +28,12 @@ export const apiResponse = (allowedMethods: HTTP_METHOD[], validator?: (payload:
           validator(payload);
         }
         // Execute
-        handler(req, res);
+        handler(req, res).catch(err => {
+          console.error("cannot handle request: " + err.toString());
+          handleError(res, err);
+        });
       } catch (err) {
-        if (err instanceof ApiError) {
-          res.status(err.status).json({detail: err.message});
-        } else {
-          res.status(500).json({detail: err.toString()})
-        }
+        handleError(res, err);
       }
     }
   };
