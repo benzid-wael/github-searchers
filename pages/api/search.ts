@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { InvalidPayload } from '../../utils/errors';
 import sampleUsersData from '../../utils/users';
-import {sampleData as sampleRepoData} from '../../utils/repo';
+import sampleRepoData from '../../utils/repo';
 import apiResponse from '../../utils/api';
 
 

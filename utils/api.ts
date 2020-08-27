@@ -3,6 +3,7 @@ import {ApiError, MethodNotAllowed} from "./errors";
 
 export type HTTP_METHOD = "HEAD" | "GET" | "POST" | "PUT" | "DELETE";
 
+
 export const apiResponse = (allowedMethods: HTTP_METHOD[], validator?: (payload: any) => void) => {
 
   const wrapper = handler => {
