@@ -1,5 +1,7 @@
-import * as React from 'react';
-
+import React, { useState } from 'react';
+import { connect, ConnectedProps, useDispatch } from "react-redux";
+import { resetSearch, startSearching } from '../shared/search/searchSlice';
+import { MINIMUM_SEARCH_TERM_LENGTH } from '../utils/config';
 import styled from 'styled-components';
 
 
@@ -42,12 +44,59 @@ const Select = styled.select`
 `;
 
 
-const Search = () => {
+const mapStateToProps = (state) => ({
+    search: state.search,
+});
+const mapDispatchToProps = dispatch => {
+  return {
+    resetSearch: (payload) => dispatch(resetSearch(payload)),
+    startSearching: (payload) => dispatch(startSearching(payload)),
+  }
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+// The inferred type will look like:
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+
+const Search: React.FC<PropsFromRedux> = (props) => {
+  const [searchQuery, setSearchQuery] = useState<{searchText: string, searchType: string}>({searchText: "", searchType: "user"});
+
+  const startSearchingIfPossible = (searchQuery) => {
+    const searchText = searchQuery.searchText;
+    if (searchText.length >= MINIMUM_SEARCH_TERM_LENGTH) {
+      props.startSearching(searchQuery);
+    } else {
+      props.resetSearch(searchQuery);
+    }
+  };
+
+  const searchTextChanged = (e) => {
+    const value = e.target.value;
+    const newSearchQuery = {...searchQuery, searchText: value};
+    setSearchQuery(newSearchQuery);
+    startSearchingIfPossible(newSearchQuery);
+  };
+
+  const searchTypeChanged = (e) => {
+    const value = e.target.value;
+    const newSearchQuery = {...searchQuery, searchType: value};
+    setSearchQuery(newSearchQuery);
+    startSearchingIfPossible(newSearchQuery);
+  };
 
   return <MainContainer>
     <WrapperContainer>
-      <InputText name="text" placeholder="Start typing to search ..." />
-      <Select name="searchType">
+      <InputText
+        name="text"
+        autocomplete="off"
+        placeholder="Start typing to search ..."
+        onChange={searchTextChanged}
+      />
+      <Select
+        name="searchType"
+        onChange={searchTypeChanged}
+      >
         <option value="user">Users</option>
         <option value="repository">Repositories</option>
       </Select>
@@ -56,5 +105,4 @@ const Search = () => {
 };
 
 
-export default Search;
-
+export default connector(Search);

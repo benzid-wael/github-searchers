@@ -1,55 +1,70 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { SearchResult } from '../../utils/github';
+import { SearchStatus } from '../search/search';
 import User from './user';
 
 
 interface UserSearchResult {
-    [key: string]: SearchResult<User> | null;
+  status: SearchStatus;
+  result: SearchResult<User> | null;
+  error: string|null;
 }
 
 
-type SearchStatus = "initial" | "loading" | "loaded" | "error"
-export interface UserState {
-    status: SearchStatus;
-    searchText: string;
-    results: UserSearchResult
+export interface UserSearchState {
+  [key: string]: UserSearchResult;
 }
 
 
-let initialState: UserState = {
-    status: "initial",
-    searchText: "",
-    results: {}
-};
+let initialState: UserSearchState = {};
 
 
 const userSlice = createSlice({
-    name: "UserSlice",
-    initialState,
-    reducers: {
-        startSearching(state, action: PayloadAction<{searchText: string}>) {
-            return {
-                ...state,
-                status: <SearchStatus>"loading",
-                searchText: action.payload.searchText
-            }
-        },
-        searchFinished(state, action: PayloadAction<{searchText: string, result: SearchResult<User>}>) {
-            let newState = {
-                ...state,
-                status: <SearchStatus>"loaded"
-            };
-            newState[action.payload.searchText] = action.payload.result;
-            return newState;
-        }
+  name: "UserSlice",
+  initialState,
+  reducers: {
+    startSearching(state, action: PayloadAction<{searchText: string}>) {
+      const newState = {
+        ...state
+      };
+      newState[action.payload.searchText] = {
+        status: "loading",
+        result: null,
+        error: null,
+      };
+      return newState;
+    },
+    searchSucceed(state, action: PayloadAction<{searchText: string, result: SearchResult<User>}>) {
+      const newState = {
+        ...state
+      };
+      newState[action.payload.searchText] = {
+        status: "loaded",
+        result: action.payload.result,
+        error: null,
+      };
+      return newState;
+    },
+    searchFailed(state, action: PayloadAction<{searchText: string, error: string}>) {
+      const newState = {
+        ...state
+      };
+      newState[action.payload.searchText] = {
+        status: "error",
+        result: null,
+        error: action.payload.error,
+      };
+      return newState;
     }
+  }
 });
 
 
 export const {
-    startSearching,
-    searchFinished,
+  startSearching,
+  searchSucceed,
+  searchFailed,
 } = userSlice.actions;
 
 export default userSlice.reducer;

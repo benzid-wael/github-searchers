@@ -3,9 +3,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { InvalidPayload, PreconditionFailed } from '../../utils/errors';
 import apiResponse from '../../utils/api';
 import { GithubClientFactory } from '../../utils/github';
+import { MINIMUM_SEARCH_TERM_LENGTH } from '../../utils/config';
 
 
-const MINIMUM_SEARCH_TERM_LENGTH = 3;
 const searchGithubRepo = async (searchText: string) => {
   // https://api.github.com/search/repositories?q=django
   const client = GithubClientFactory.client;
@@ -39,9 +39,6 @@ const validatePayload = (payload: {searchType: string, searchText: string}) => {
     throw new InvalidPayload('Unsupported search type: ' + payload.searchType);
   }
 };
-
-
-
 
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
