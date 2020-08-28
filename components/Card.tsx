@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 
 const CardWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   margin 16px 8px;
   width: 300px;
-  height: 200px;
+  height: 232px;
   border: 1px solid gray;
 `;
 
@@ -25,10 +27,9 @@ interface SearchResultProps {
 
 
 const Card = (props: SearchResultProps) => {
-  const title = props.title || "My card";
 
   return <CardWrapper style={props.style}>
-    <CardHeader>{title}</CardHeader>
+    {props.title ? <CardHeader>{props.title}</CardHeader> : ""}
     {props.children}
   </CardWrapper>
 };

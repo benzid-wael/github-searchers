@@ -46,7 +46,7 @@ abstract class BaseGithubClient {
         nextPage: resp.nextPage,
         totalPages: resp.totalPages
       },
-      items: response.items.map(item => (<Repository>{
+      items: response.items.map(item => ({
         name: item.name,
         repositoryUrl: item.html_url,
         createdAt: item.created_at,
@@ -55,17 +55,24 @@ abstract class BaseGithubClient {
         watchers: item.watchers,
         stars: item.stargazers_count,
         author: {
-          name: item.author.login,
-          avatarUrl: item.author.avatar_url,
-          url: item.author.html_url
+          name: item.owner.login,
+          avatarUrl: item.owner.avatar_url,
+          url: item.owner.html_url
         }
       }))
     }
   };
 
   findUsers = async (text: string, page: number=1): Promise<SearchResult<User>> => {
-    const resp = await this._search('repositories', text, page);
+    const resp = await this._search('users', text, page);
     const response = resp.response;
+    const users: User[] = response.items.map(item => {
+      return {
+        name: item.login,
+        avatarUrl: item.avatar_url,
+        url: item.html_url
+      }
+    });
     return {
       meta: {
         total: response.total_count,
@@ -73,11 +80,7 @@ abstract class BaseGithubClient {
         nextPage: resp.nextPage,
         totalPages: resp.totalPages
       },
-      items: response.items.map(item => (<User>{
-        name: item.login,
-        avatarUrl: item.avatar_url,
-        url: item.html_url
-      }))
+      items: users
     }
   }
 }

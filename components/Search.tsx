@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { connect, ConnectedProps, useDispatch } from "react-redux";
-import { resetSearch, startSearching } from '../shared/search/searchSlice';
+import { connect, ConnectedProps } from "react-redux";
+import { resetSearch, search } from '../shared/search/searchSlice';
 import { MINIMUM_SEARCH_TERM_LENGTH } from '../utils/config';
 import styled from 'styled-components';
 
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return {
     resetSearch: (payload) => dispatch(resetSearch(payload)),
-    startSearching: (payload) => dispatch(startSearching(payload)),
+    search: (payload) => dispatch(search(payload)),
   }
 };
 
@@ -64,10 +64,14 @@ const Search: React.FC<PropsFromRedux> = (props) => {
 
   const startSearchingIfPossible = (searchQuery) => {
     const searchText = searchQuery.searchText;
+    const query = {
+      searchText: searchQuery.searchText,
+      searchType: searchQuery.searchType,
+    };
     if (searchText.length >= MINIMUM_SEARCH_TERM_LENGTH) {
-      props.startSearching(searchQuery);
+      props.search(query);
     } else {
-      props.resetSearch(searchQuery);
+      props.resetSearch(query);
     }
   };
 
@@ -89,7 +93,7 @@ const Search: React.FC<PropsFromRedux> = (props) => {
     <WrapperContainer>
       <InputText
         name="text"
-        autocomplete="off"
+        autoComplete="off"
         placeholder="Start typing to search ..."
         onChange={searchTextChanged}
       />

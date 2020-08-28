@@ -1,9 +1,11 @@
 import React, { useState, useEffect }  from 'react';
-import { connect, ConnectedProps, useDispatch } from "react-redux";
-import styled from 'styled-components';
+import { connect, ConnectedProps } from "react-redux";
+import styled, {CSSProperties} from 'styled-components';
 
 import Card from "../components/Card";
 import FlexGrid from '../components/FlexGrid';
+import User from '../components/User';
+import Repository from '../components/Repository';
 import Layout from '../components/Layout';
 import Search from '../components/Search';
 
@@ -73,6 +75,15 @@ const connector = connect(mapStateToProps, null);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 
+const SearchResult = (searchType, result) => {
+  const CardContent =  searchType == 'user' ? User : Repository;
+
+  return <FlexGrid>
+    {result.items.map( (item, i) => <Card key={i}><CardContent data={item}/></Card>)}
+  </FlexGrid>
+};
+
+
 const IndexPage: React.FC<PropsFromRedux> = (props) => {
   const [searchState, setSearchState] = useState("initial");
 
@@ -82,25 +93,13 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
     }
   });
 
-  const initialStateStyle = {
+  const initialStateStyle: CSSProperties = {
     position: 'absolute',
     width: '80%',
     left: 'calc(50% - 220px)',
     top: 'calc(50% - 60px)',
     height: '120px',
   };
-
-  const cards = <FlexGrid>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-    <Card></Card>
-  </FlexGrid>;
 
   console.log("Search state: " + JSON.stringify(searchState));
   return <Layout title="Github Searcher">
@@ -116,7 +115,7 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
 
         <Search />
 
-        {searchState === "loaded" ? cards : "" }
+        {(searchState === "loaded" && props.search.searchResult) ? SearchResult(props.search.searchType, props.search.searchResult): "" }
         {searchState === "loading" ? <Loader>Loading...</Loader> : ""}
       </div>
     </div>
