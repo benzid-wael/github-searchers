@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Github Searchers API",
+    "description": "Search for users and repositories in Github",
+    "contact": {
+      "name": "Wael Ben Zid",
+      "email": "benzid.wael@hotmail.fr"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/_apidoc",
+      "description": "Local server"
+    },
+    {
+      "url": "https://github-searchers.vercel.app/_apidoc",
+      "description": "Testing server"
+    }
+  ],
+  "tags":[{
+    "name": "Search",
+    "description": "Search API"
+  }],
+  "paths": {
+    "/api/search": {
+      "post": {
+        "tags": ["Search"],
+        "operationId": "search",
+        "summary": "Search for Github objects such as users",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/SearchPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/SearchApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ApiError"
+                },
+                "example": {
+                  "detail": "Unsupported search type: issue"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid HTTP method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ApiError"
+                },
+                "example": {
+                  "detail": "Allowed methods: POST"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Search text is too short",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ApiError"
+                },
+                "example": {
+                  "detail": "This API expects a search query with at least 3 characters"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SearchPayload": {
+      "type": "object",
+      "properties": {
+        "searchText": {
+          "type": "string"
+        },
+        "searchType": {
+          "type": "string",
+          "enum": ["user", "repository"]
+        }
+      },
+      "example": {
+        "searchText": "wael",
+        "searchType": "user"
+      }
+    },
+    "SearchApiMeta": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "previousPage": {
+          "type": "integer"
+        },
+        "nextPage": {
+          "type": "integer"
+        },
+        "totalPages": {
+          "type": "integer"
+        }
+      },
+      "example": {
+        "total": 135,
+        "previousPage": 3,
+        "nextPage": 4,
+        "totalPages": 14
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "url"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "format": "url"
+        }
+      },
+      "example": {
+        "name": "Wael",
+        "url": "https://github.com/benzid-wael/",
+        "avatarUrl": "https://avatars0.githubusercontent.com/u/4288931?s=60&v=4"
+      }
+    },
+    "Repository": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "repositoryUrl": {
+          "type": "string",
+          "format": "url"
+        },
+        "author": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "example": {
+        "name": "github-searchers ",
+        "repositoryUrl": "https://github.com/benzid-wael/github-searchers",
+        "author": {
+          "name": "Wael",
+          "url": "https://github.com/benzid-wael/",
+          "avatarUrl": "https://avatars0.githubusercontent.com/u/4288931?s=60&v=4"
+        }
+      }
+    },
+    "SearchApiResponse": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/SearchApiMeta"
+        },
+        "items": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Repository"
+              }
+            }
+          ]
+        }
+      },
+      "example": {
+        "meta": {
+          "total": 1,
+          "previousPage": null,
+          "nextPage": null,
+          "totalPages": 1
+        },
+        "items": [
+          {
+            "name": "Wael Ben Zid El Guebsi",
+            "url": "https://github.com/benzid-wael/",
+            "avatarUrl": "https://avatars0.githubusercontent.com/u/4288931?s=60&v=4"
+          }
+        ]
+      }
+    },
+    "ApiError": {
+      "type": "object",
+      "properties": {
+        "detail": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
