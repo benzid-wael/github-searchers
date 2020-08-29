@@ -4,7 +4,7 @@ import {ApiError, MethodNotAllowed} from "./errors";
 export type HTTP_METHOD = "HEAD" | "GET" | "POST" | "PUT" | "DELETE";
 
 
-const handleError = (res, err) => {
+export const handleError = (res, err) => {
   if (err instanceof ApiError) {
     res.status(err.status).json({detail: err.message});
   } else {
