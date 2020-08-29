@@ -26,8 +26,9 @@ $ yarn dev
 ## Architecture
 TODO
 
-## Known Bugs
-TODO
-
 ## Features
 TODO
+
+## Known Bugs
+You can see list of all open issues [here](https://github.com/benzid-wael/github-searchers/issues/)
+
