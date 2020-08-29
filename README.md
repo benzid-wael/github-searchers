@@ -1,6 +1,6 @@
 # Github searchers 
 
-This is my solution for [Tradeling]() Full-stack coding exercise.
+This is my solution for [Tradeling](https://www.tradeling.com/) Full-stack [coding task](https://github.com/tradeling/coding-tasks/blob/develop/fullstack-javascript/readme.md)
 The goal is to build a SPA that allows users to search for specific users or repositories.
 The solution uses Github Search API to execute users' queries.
 
