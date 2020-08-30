@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { SearchResult } from '../../utils/github';
+import { SearchResult } from '../../utils/backend/github';
 
 
 export interface SearchResultState<T> {

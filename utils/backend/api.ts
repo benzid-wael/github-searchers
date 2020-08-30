@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {ApiError, MethodNotAllowed} from "./errors";
+import {ApiError, MethodNotAllowed} from "../errors";
 
 export type HTTP_METHOD = "HEAD" | "GET" | "POST" | "PUT" | "DELETE";
 

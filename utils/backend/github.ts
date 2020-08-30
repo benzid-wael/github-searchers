@@ -1,7 +1,7 @@
-import User from '../shared/user/user';
-import Repository from '../shared/repository/repository';
-import sampleUsersData from './users';
-import sampleRepoData from './repo';
+import User from '../../shared/user/user';
+import Repository from '../../shared/repository/repository';
+import sampleUsersData from '../users';
+import sampleRepoData from '../repo';
 
 
 export type GithubEntityType = 'users' | 'repositories';

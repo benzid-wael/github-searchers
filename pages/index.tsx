@@ -9,6 +9,8 @@ import Repository from '../components/Repository';
 import Layout from '../components/Layout';
 import Search from '../components/Search';
 
+import './index.css'
+
 
 const AppHeader = styled.header`
   display: flex;
@@ -94,17 +96,17 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
   });
 
   const initialStateStyle: CSSProperties = {
-    position: 'absolute',
-    width: '80%',
-    left: 'calc(50% - 220px)',
-    top: 'calc(50% - 60px)',
-    height: '120px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    verticalAlign: 'middle'
   };
 
   console.log("Search state: " + JSON.stringify(searchState));
   return <Layout title="Github Searcher">
-    <div>
-      <div style={searchState !== "loaded" ? initialStateStyle: {marginTop: "20px"}}>
+    <div style={searchState !== "loaded" ? initialStateStyle : { marginTop: "24px" }}>
+      <div>
         <AppHeader>
           <img src="/images/github.svg" style={{padding: "0 8px", width: "40px", height: "40px", marginTop: "-8px" }}/>
           <Brand>
