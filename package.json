@@ -1,12 +1,12 @@
 {
-  "name": "with-typescript",
+  "name": "github-searcher-frontend",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "test": "jest --watch --coverage --verbose",
+    "test": "jest --watch --coverage --verbose --silent=false",
     "test:ci": "jest --ci"
   },
   "dependencies": {
@@ -22,7 +22,10 @@
     "swagger-ui-react": "^3.32.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@types/jest": "^26.0.10",
@@ -40,6 +43,5 @@
     "redux-mock-store": "^1.5.4",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
-  },
-  "license": "ISC"
+  }
 }

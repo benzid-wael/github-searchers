@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlexGrid should render correctly Empty FlexGrid: empty-flexgtid 1`] = `
+<div
+  className="sc-AxiKw cydMkg"
+>
+  <div
+    className="sc-AxhCb ctdKxn"
+  />
+</div>
+`;
+
+exports[`FlexGrid should render correctly FlexGrid with some cards: non-empty-flexgrid 1`] = `
+<div
+  className="sc-AxiKw cydMkg"
+>
+  <div
+    className="sc-AxhCb ctdKxn"
+  >
+    <div
+      className="sc-AxjAm iEZjyM"
+    >
+      <div
+        className="sc-AxirZ kUTnFM"
+      >
+        First Card
+      </div>
+    </div>
+    <div
+      className="sc-AxjAm iEZjyM"
+    >
+      <div
+        className="sc-AxirZ kUTnFM"
+      >
+        Second Card
+      </div>
+    </div>
+    <div
+      className="sc-AxjAm iEZjyM"
+    >
+      <div
+        className="sc-AxirZ kUTnFM"
+      >
+        Third Card
+      </div>
+      <h3>
+        Hello World!
+      </h3>
+    </div>
+  </div>
+</div>
+`;

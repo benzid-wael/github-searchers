@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalLink should render correctly ExternalLink without custom styles: with-custom-style 1`] = `
+<a
+  className="sc-AxjAm lnbIcq"
+  href="https://github-searchers.vercel.app"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+  target="_blank"
+>
+  Github Searchers
+</a>
+`;
+
+exports[`ExternalLink should render correctly ExternalLink without custom styles: without-custom-style 1`] = `
+<a
+  className="sc-AxjAm lnbIcq"
+  href="https://github-searchers.vercel.app"
+  target="_blank"
+>
+  Github Searchers
+</a>
+`;

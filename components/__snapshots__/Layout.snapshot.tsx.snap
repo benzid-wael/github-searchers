@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should render correctly Layout with custom title: layout-with-custom-title 1`] = `
+<div>
+  <div
+    className="sc-AxjAm iBuasp"
+  />
+</div>
+`;
+
+exports[`Layout should render correctly Layout with some children: layout-with-children 1`] = `
+<div>
+  <div
+    className="sc-AxjAm iBuasp"
+  >
+    <header>
+      Github Searchers
+    </header>
+    <section
+      className="main"
+    >
+      <span>
+        This is main area
+      </span>
+    </section>
+    <section
+      className="footer"
+    >
+      <span>
+        This is footer
+      </span>
+    </section>
+  </div>
+</div>
+`;
+
+exports[`Layout should render correctly Layout without children: layout-without-children 1`] = `
+<div>
+  <div
+    className="sc-AxjAm iBuasp"
+  />
+</div>
+`;

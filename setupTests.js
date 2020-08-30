@@ -9,7 +9,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Enzyme, { mount, shallow } from 'enzyme';
-// import renderer from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 
 import { render } from '@testing-library/react';
 
@@ -23,7 +23,7 @@ global.React = React;
 global.ReactDOM = ReactDOM;
 global.mount = mount;
 global.shallow = shallow;
-// global.renderer = renderer;
+global.renderer = renderer;
 // global.Route = Route;
 // global.Switch = Switch;
 // global.BrowserRouter = BrowserRouter;

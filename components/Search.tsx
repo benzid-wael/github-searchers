@@ -59,7 +59,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 
-const Search: React.FC<PropsFromRedux> = (props) => {
+export const Search: React.FC<PropsFromRedux> = (props) => {
   const [searchQuery, setSearchQuery] = useState<{searchText: string, searchType: string}>({searchText: "", searchType: "user"});
 
   const startSearchingIfPossible = (searchQuery) => {

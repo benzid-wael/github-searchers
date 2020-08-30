@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search should render correctly 1`] = `
+<div
+  className="sc-AxjAm fDEmJb"
+>
+  <div
+    className="sc-AxirZ bZoKdN"
+  >
+    <input
+      autoComplete="off"
+      className="sc-AxiKw hreuoV"
+      name="text"
+      onChange={[Function]}
+      placeholder="Start typing to search ..."
+    />
+    <select
+      className="sc-AxhCb gKnLwT"
+      name="searchType"
+      onChange={[Function]}
+    >
+      <option
+        value="user"
+      >
+        Users
+      </option>
+      <option
+        value="repository"
+      >
+        Repositories
+      </option>
+    </select>
+  </div>
+</div>
+`;

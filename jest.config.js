@@ -8,7 +8,7 @@ module.exports = {
   ],
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx)',
-    '**/?(*.)+(spec|test).+(ts|tsx)'
+    '**/?(*.)+(spec|snapshot).+(ts|tsx)'
   ],
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
@@ -29,4 +29,16 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
+  globals: {
+    'ts-jest': {
+      babelConfig: true,
+      tsConfig: 'jest.tsconfig.json'
+    }
+  },
+  coverageReporters: [
+    "json",
+    "lcov",
+    "text",
+    "text-summary"
+  ]
 };
