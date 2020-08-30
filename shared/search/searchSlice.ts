@@ -7,7 +7,7 @@ import User from '../../shared/user/user';
 import { addSearchResult as addUserSearchResult } from '../../shared/user/userSlice';
 import { AppThunk } from "../../store/store";
 import { SearchResult } from '../../utils/backend/github';
-import {GithubSearcherAPI} from "../../utils/frontend/GithubSearcherAPI";
+import { GithubSearcherAPI } from "../../utils/frontend/GithubSearcherAPI";
 
 
 export type SearchType = "user" | "repository";

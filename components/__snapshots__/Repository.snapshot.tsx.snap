@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Repository should render correctly 1`] = `
+<div
+  className="sc-AxiKw iTIBYz"
+>
+  <span
+    style={
+      Object {
+        "fontSize": "18px",
+        "fontWeight": "bold",
+        "margin": "4px",
+      }
+    }
+  >
+    <a
+      className="sc-AxjAm lnbIcq"
+      href="https://github.com/benzid-wael/github-searchers"
+      target="_blank"
+    >
+      Github Searchers
+    </a>
+  </span>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
+    >
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "fontWeight": 500,
+          }
+        }
+      >
+        Stars
+      </span>
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "backgroundColor": "#70ccd3",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
+    >
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "fontWeight": 500,
+          }
+        }
+      >
+        Forks
+      </span>
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "backgroundColor": "#70ccd3",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
+    >
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "fontWeight": 500,
+          }
+        }
+      >
+        Watchers
+      </span>
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "backgroundColor": "#70ccd3",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "margin": "8px",
+        }
+      }
+    >
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "fontWeight": 500,
+          }
+        }
+      >
+        Open Issues
+      </span>
+      <span
+        className="sc-AxhCb bRNTTE"
+        style={
+          Object {
+            "backgroundColor": "#70ccd3",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="sc-AxirZ kEGBWq"
+  >
+    <img
+      src="https://avatars0.githubusercontent.com/u/4288931?s=60&v=4"
+      style={
+        Object {
+          "borderRadius": "50%",
+          "height": "72px",
+          "margin": "4px",
+          "width": "72px",
+        }
+      }
+    />
+    <a
+      className="sc-AxjAm lnbIcq"
+      href="https://github.com/benzid-wael/"
+      style={
+        Object {
+          "fontSize": "18px",
+        }
+      }
+      target="_blank"
+    >
+      John Doe
+    </a>
+  </div>
+</div>
+`;
