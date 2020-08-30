@@ -1,5 +1,7 @@
 import User from '../../shared/user/user';
 import Repository from '../../shared/repository/repository';
+import { getRedisClient } from "./cache";
+import { RateLimitReached } from "../errors";
 import sampleUsersData from '../users';
 import sampleRepoData from '../repo';
 
@@ -7,18 +9,19 @@ import sampleRepoData from '../repo';
 export type GithubEntityType = 'users' | 'repositories';
 
 
-export interface MetaInfo {
-  total: number;
-  previousPage: number|null;
-  nextPage: number|null;
-  totalPages: number;
+interface PaginationMeta {
+  first?: number|null;
+  prev: number|null;
+  next: number|null;
+  last: number|null;
 }
 
-interface GenericApiResponse {
+export interface MetaInfo extends PaginationMeta {
+  total: number;
+}
+
+interface GenericApiResponse extends PaginationMeta {
   response: any;
-  previousPage: number|null;
-  nextPage: number|null;
-  totalPages: number;
 }
 
 export interface SearchResult<T> {
@@ -36,15 +39,20 @@ abstract class BaseGithubClient {
    */
   abstract _search: (type: GithubEntityType, text: string, page: number) => Promise<GenericApiResponse>;
 
+  /*
+   *
+   * Find Github repositories matching your search text
+   */
   findRepositories = async (text: string, page: number=1): Promise<SearchResult<Repository>> => {
     const resp = await this._search('repositories', text, page);
     const response = resp.response;
     return {
       meta: {
         total: response.total_count,
-        previousPage: resp.previousPage,
-        nextPage: resp.nextPage,
-        totalPages: resp.totalPages
+        first: resp.first || null,
+        prev: resp.prev || null,
+        next: resp.next || null,
+        last: resp.last || null
       },
       items: response.items.map(item => ({
         name: item.name,
@@ -63,6 +71,10 @@ abstract class BaseGithubClient {
     }
   };
 
+  /*
+   *
+   * Find Github users matching your search text
+   */
   findUsers = async (text: string, page: number=1): Promise<SearchResult<User>> => {
     const resp = await this._search('users', text, page);
     const response = resp.response;
@@ -76,13 +88,80 @@ abstract class BaseGithubClient {
     return {
       meta: {
         total: response.total_count,
-        previousPage: resp.previousPage,
-        nextPage: resp.nextPage,
-        totalPages: resp.totalPages
+        first: resp.first || null,
+        prev: resp.prev || null,
+        next: resp.next || null,
+        last: resp.last || null
       },
       items: users
     }
   }
+}
+
+
+export class GithubClient extends BaseGithubClient {
+
+  extractPageInfo = (header: string): PaginationMeta => {
+      const links = header.split(',');
+      return links.reduce((acc, cur) => {
+        const link = /<([^>]+)>;\s+rel="([^"]+)"/ig.exec(cur);
+
+        if(!link) return acc;
+
+        const url = new URL(link[1]);
+        const page = url.searchParams.get('page')
+        acc[link[2]] = page ? parseInt(page): null;
+        return acc;
+      }, {}) as PaginationMeta;
+  };
+
+  _fetch = async (type: GithubEntityType, text: string, page: number): Promise<any> => {
+    let url = new URL(`https://api.github.com/search/${type}`);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    const params = {
+      page: page.toString(),
+      query: text,
+      per_page: '25'  // TODO make it variable
+    };
+    url.search = new URLSearchParams(params).toString();
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: headers
+    });
+
+    // Github return 403 when rate limit exceeded
+    if(response.status === 403) {
+      throw new RateLimitReached('Too many requests. Try after 10 minutes.');
+    } else if (response.status !== 200) {
+      throw new Error(response.statusText);
+    }
+
+    return response;
+  };
+
+  // @ts-ignore
+  _search = async (type: GithubEntityType, text: string, page: number): Promise<GenericApiResponse> => {
+    const cacheKey = `github:${type.toLowerCase()}:${text.toLowerCase().replace(' ', '-')}:${page}`;
+    const redis = await getRedisClient();
+    const cached = await redis.get(cacheKey);
+    if (cached) {
+      return JSON.parse(cached as string);
+    }
+
+    const response = await this._fetch(type, text, page);
+    const body = await response.json();
+
+    const result = {
+      response: body,
+      ...this.extractPageInfo(response.headers.get('link') || '')
+    };
+
+    await redis.set(cacheKey, JSON.stringify(result));
+    return result;
+  };
 }
 
 
@@ -94,9 +173,9 @@ export class FakeGithubClient extends BaseGithubClient {
     const totalPages = 3;
     return {
       response: body,
-      previousPage: page > 1 ? (page - 1) : null,
-      nextPage: page < totalPages ? (page + 1): null,
-      totalPages: totalPages
+      prev: page > 1 ? (page - 1) : null,
+      next: page < totalPages ? (page + 1): null,
+      last: totalPages
     }
   };
 }
@@ -107,6 +186,6 @@ export class GithubClientFactory {
     if (process.env.USE_FAKE_CLIENT && process.env.USE_FAKE_CLIENT == '1') {
       return new FakeGithubClient();
     }
-    return new FakeGithubClient();
+    return new GithubClient();
   }
 }
