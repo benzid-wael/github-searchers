@@ -6,7 +6,8 @@ import { addSearchResult as addRepositorySearchResult } from '../../shared/repos
 import User from '../../shared/user/user';
 import { addSearchResult as addUserSearchResult } from '../../shared/user/userSlice';
 import { AppThunk } from "../../store/store";
-import { SearchResult } from '../../utils/github';
+import { SearchResult } from '../../utils/backend/github';
+import {GithubSearcherAPI} from "../../utils/frontend/GithubSearcherAPI";
 
 
 export type SearchType = "user" | "repository";
@@ -77,37 +78,12 @@ export const {
   searchResultFailed,
 } = searchSlice.actions;
 
-export default searchSlice.reducer;
-
-
-export const getSearchResult = async (query: SearchQueryPayload) => {
-  let init: RequestInit = {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(query),
-  };
-  const response = await fetch('/api/search', init);
-  if (response.status === 200) {
-    return await response.json();
-  } else {
-    let error = "";
-    try {
-      const body = await response.json();
-      error = body.detail;
-    } catch (e) {
-      error = `Oops! something went wrong (error_code: ${response.status})`;
-    }
-    throw new Error(error);
-  }
-};
-
 
 export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, getState)  => {
   dispatch(startSearching(query));
   try {
-    const response = await getSearchResult(query);
+    const client = new GithubSearcherAPI();
+    const response = await client.search(query);
     if(query.searchType === "user") {
       // Update search result
       dispatch(addUserSearchResult({
@@ -136,3 +112,6 @@ export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, 
     dispatch(searchResultFailed(e.message));
   }
 };
+
+
+export default searchSlice.reducer;

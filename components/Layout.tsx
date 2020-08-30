@@ -11,7 +11,7 @@ type Props = {
 
 
 const Container = styled.div`
-    margin: 48px;
+    margin: 0 auto;
 `;
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (

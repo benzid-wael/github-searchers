@@ -1,6 +1,6 @@
-import { ApiError, MethodNotAllowed, InvalidPayload, PreconditionFailed } from "./errors";
+import { ApiError, MethodNotAllowed, InvalidPayload, PreconditionFailed } from "../errors";
 import { apiResponse, handleError } from './api';
-import { mockRequest, mockResponse } from "./testing";
+import { mockRequest, mockResponse } from "../testing";
 
 
 describe('handleError should return appropriate json response when api throw Error', () => {

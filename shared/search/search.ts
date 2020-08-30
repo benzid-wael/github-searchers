@@ -1,4 +1,4 @@
-import { SearchResult } from '../../utils/github';
+import { SearchResult } from '../../utils/backend/github';
 import User from '../user/user';
 import Repository from '../repository/repository';
 
