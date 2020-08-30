@@ -45,3 +45,14 @@ export class PreconditionFailed extends ApiError {
     this.stack = (<any> new Error()).stack;
   }
 }
+
+
+export class RateLimitReached extends ApiError {
+  static statusCode = 429;
+
+  constructor(public message: string) {
+    super(message);
+    this.name = "PreconditionFailed";
+    this.stack = (<any> new Error()).stack;
+  }
+}

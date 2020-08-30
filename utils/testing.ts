@@ -48,9 +48,9 @@ export const mockUserSearchResult = (): SearchResult<User> => {
   return {
     meta: {
       total: 1,
-      previousPage: null,
-      nextPage: null,
-      totalPages: 1
+      prev: null,
+      next: null,
+      last: 1
     },
     items: [
         mockUser({})
@@ -63,9 +63,9 @@ export const mockRepositorySearchResult = (): SearchResult<Repository> => {
   return {
     meta: {
       total: 1,
-      previousPage: null,
-      nextPage: null,
-      totalPages: 1
+      prev: null,
+      next: null,
+      last: 1
     },
     items: [
         mockRepository()
