@@ -17,7 +17,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]

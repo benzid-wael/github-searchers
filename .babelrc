@@ -2,11 +2,18 @@
   "presets": [
     "next/babel",
     "@babel/preset-react",
+    "@babel/preset-typescript",
     [
       "@babel/preset-env",
       { "targets": {"node": "current"} }
-    ],
-    "@babel/preset-typescript"
+    ]
   ],
-  "plugins": []
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ]
+  ]
 }
