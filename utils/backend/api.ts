@@ -41,11 +41,9 @@ export const apiResponse = (allowedMethods: HTTP_METHOD[], validator?: (payload:
         }
         // Execute
         handler(req, res).catch(err => {
-          console.error("cannot handle request: " + err.toString());
           handleError(res, err);
         });
       } catch (err) {
-        console.error(`API hendler failed: ${err.toString()}`)
         handleError(res, err);
       }
     }
@@ -80,21 +78,17 @@ export const cache = ({ prefix, timeout, version }: { prefix: string, timeout?: 
     }
 
     descriptor.value = async (...args) => {
-      const cacheKey = `${version}:${prefix}:${args.map(arg => arg.toString()).join(':')}`
-      console.error(`[cache] cache key: ${cacheKey}`)
+      const cacheKey = `${prefix}:${version}:${args.map(arg => arg.toString()).join(':')}`
       const cacheStorage = new RedisCacheStorage(CACHE_HOST, CACHE_PORT);
       const cached = await cacheStorage.get(cacheKey);
 
       if (cached) {
-        console.error(`[cache] returning from cache`)
         return cached;
       }
 
-      console.error(`[cache] invoking method`)
       const result = await originalMethod.apply(target, args);
 
-      const res = await cacheStorage.set(cacheKey, result, timeout);
-      console.error(`[cache] Cache updated, key: ${cacheKey}, result: ${res}`);
+      await cacheStorage.set(cacheKey, result, timeout);
       return result;
     }
 
