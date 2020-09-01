@@ -103,7 +103,6 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
     verticalAlign: 'middle'
   };
 
-  console.log("Search state: " + JSON.stringify(searchState));
   return <Layout title="Github Searcher">
     <div style={searchState !== "loaded" ? initialStateStyle : { marginTop: "24px" }}>
       <div>

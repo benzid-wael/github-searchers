@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { InvalidPayload, PreconditionFailed } from '../../utils/errors';
 import apiResponse from '../../utils/backend/api';
 import { GithubClientFactory } from '../../utils/backend/github';
-import { MINIMUM_SEARCH_TERM_LENGTH } from '../../utils/config';
+import { MINIMUM_SEARCH_TERM_LENGTH } from '../../shared/config';
 
 
 const searchGithubRepo = async (searchText: string) => {

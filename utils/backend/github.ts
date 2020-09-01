@@ -1,9 +1,10 @@
-import User from '../../shared/user/user';
-import Repository from '../../shared/repository/repository';
-import { getRedisClient } from "./cache";
+import { cache } from "./api";
 import { RateLimitReached } from "../errors";
 import sampleUsersData from '../users';
 import sampleRepoData from '../repo';
+import { GITHUB_USE_FAKE_CLIENT } from '../../shared/config';
+import User from '../../shared/user/user';
+import Repository from '../../shared/repository/repository';
 
 
 export type GithubEntityType = 'users' | 'repositories';
@@ -37,14 +38,14 @@ abstract class BaseGithubClient {
    * @param type  github object type
    * @param text  search keyword
    */
-  abstract _search: (type: GithubEntityType, text: string, page: number) => Promise<GenericApiResponse>;
+  abstract async search (type: GithubEntityType, text: string, page: number): Promise<GenericApiResponse>;
 
   /*
    *
    * Find Github repositories matching your search text
    */
   findRepositories = async (text: string, page: number=1): Promise<SearchResult<Repository>> => {
-    const resp = await this._search('repositories', text, page);
+    const resp = await this.search('repositories', text, page);
     const response = resp.response;
     return {
       meta: {
@@ -76,7 +77,7 @@ abstract class BaseGithubClient {
    * Find Github users matching your search text
    */
   findUsers = async (text: string, page: number=1): Promise<SearchResult<User>> => {
-    const resp = await this._search('users', text, page);
+    const resp = await this.search('users', text, page);
     const response = resp.response;
     const users: User[] = response.items.map(item => {
       return {
@@ -101,8 +102,11 @@ abstract class BaseGithubClient {
 
 export class GithubClient extends BaseGithubClient {
 
-  extractPageInfo = (header: string): PaginationMeta => {
-      const links = header.split(',');
+  /*
+   * Extract pagination information from response
+   */
+  extractPageInfo(linksHeader: string): PaginationMeta {
+      const links = linksHeader.split(',');
       return links.reduce((acc, cur) => {
         const link = /<([^>]+)>;\s+rel="([^"]+)"/ig.exec(cur);
 
@@ -115,18 +119,19 @@ export class GithubClient extends BaseGithubClient {
       }, {}) as PaginationMeta;
   };
 
-  _fetch = async (type: GithubEntityType, text: string, page: number): Promise<any> => {
+  async fetchFromGithub(type: GithubEntityType, text: string, page: number) {
     let url = new URL(`https://api.github.com/search/${type}`);
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.github.v3+json'
     };
     const params = {
+      q: text,
       page: page.toString(),
-      query: text,
       per_page: '25'  // TODO make it variable
     };
     url.search = new URLSearchParams(params).toString();
+    console.log('Planning to hit: ' + url.toString());
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: headers
@@ -138,37 +143,27 @@ export class GithubClient extends BaseGithubClient {
     } else if (response.status !== 200) {
       throw new Error(response.statusText);
     }
+    const body = await response.json();
 
-    return response;
+    const linksHeader = response.headers.get('link') || ''
+
+    return {
+      response: body,
+      ...this.extractPageInfo(linksHeader)
+    };
   };
 
   // @ts-ignore
-  _search = async (type: GithubEntityType, text: string, page: number): Promise<GenericApiResponse> => {
-    const cacheKey = `github:${type.toLowerCase()}:${text.toLowerCase().replace(' ', '-')}:${page}`;
-    const redis = await getRedisClient();
-    const cached = await redis.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached as string);
-    }
-
-    const response = await this._fetch(type, text, page);
-    const body = await response.json();
-
-    const result = {
-      response: body,
-      ...this.extractPageInfo(response.headers.get('link') || '')
-    };
-
-    await redis.set(cacheKey, JSON.stringify(result));
-    return result;
-  };
+  @cache({ prefix: 'github' })
+  async search(type: GithubEntityType, text: string, page: number) {
+    return await this.fetchFromGithub(type, text, page);
+  }
 }
-
 
 export class FakeGithubClient extends BaseGithubClient {
 
   // @ts-ignore
-  _search = async (type: GithubEntityType, text: string, page: number): Promise<GenericApiResponse> => {
+  search = async (type: GithubEntityType, text: string, page: number): Promise<GenericApiResponse> => {
     const body = type === 'users' ? sampleUsersData : sampleRepoData;
     const totalPages = 3;
     return {
@@ -182,10 +177,14 @@ export class FakeGithubClient extends BaseGithubClient {
 
 
 export class GithubClientFactory {
-  static get client() {
-    if (process.env.USE_FAKE_CLIENT && process.env.USE_FAKE_CLIENT == '1') {
+  static getClient = (useFakeClient: boolean) => {
+    if (useFakeClient) {
       return new FakeGithubClient();
     }
     return new GithubClient();
+  }
+
+  static get client() {
+    return this.getClient(GITHUB_USE_FAKE_CLIENT);
   }
 }

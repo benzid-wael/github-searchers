@@ -2,6 +2,7 @@
 
 # IDE
 .idea/
+.vscode/
 
 # dependencies
 /node_modules
@@ -21,6 +22,7 @@
 # misc
 .DS_Store
 *.pem
+data/
 
 # debug
 npm-debug.log*

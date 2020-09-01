@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from "react-redux";
 import { resetSearch, search } from '../shared/search/searchSlice';
-import { MINIMUM_SEARCH_TERM_LENGTH } from '../utils/config';
+import { MINIMUM_SEARCH_TERM_LENGTH } from '../shared/config';
 import styled from 'styled-components';
 
 
