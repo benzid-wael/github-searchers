@@ -52,4 +52,18 @@ describe('RedisCacheStorage', () => {
         // then
         expect(mock).toHaveBeenCalled();
     })
+
+    it('delKeysStartingWith should call Tedis.command', async () => {
+        // given
+        const mock = jest.fn();
+        // @ts-ignore
+        (TedisPool as jest.Mock<TedisPool>).mockImplementation(() => ({ getTedis: () => Promise.resolve({ command: mock }) }));
+        const testee = new RedisCacheStorage('127.0.0.1', 6379);
+        // when
+        await testee.delKeysStartingWith('github');
+        // then
+        const call = mock.mock.calls[0];
+        expect(call[0]).toEqual('EVAL');  // Check that we are using EVAL command
+        expect(call[call.length - 1]).toEqual('github:*');  // Check that we provided correct prefix
+    })
 })

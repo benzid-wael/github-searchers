@@ -9,6 +9,7 @@ export abstract class CacheStorage {
   abstract get(key: string);
   abstract set(key: string, value: any, timeout?: number);
   abstract del(key: string);
+  abstract flushdb(key: string);
 }
 
 
@@ -54,7 +55,7 @@ export class RedisCacheStorage extends CacheStorage {
   /*
    * Delete keys starting with the given prefix
    */
-  async delKeysStartsWith(prefix: string, sep?: string) {
+  async delKeysStartingWith(prefix: string, sep?: string) {
     const seperator = sep || ':';
     const client = await this.getClient();
     // Since Redis v2.6, we can run lua script
