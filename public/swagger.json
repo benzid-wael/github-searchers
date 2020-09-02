@@ -7,30 +7,39 @@
     "contact": {
       "name": "Wael Ben Zid",
       "email": "benzid.wael@hotmail.fr"
-    }
+    },
+    "baseUrl": "/"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/_apidoc",
+      "url": "http://localhost:3000",
       "description": "Local server"
     },
     {
-      "url": "https://github-searchers.vercel.app/_apidoc",
+      "url": "https://github-searchers.vercel.app",
       "description": "Testing server"
     }
   ],
-  "tags":[{
-    "name": "Search",
-    "description": "Search API"
-  }],
+  "tags": [
+    {
+      "name": "Search",
+      "description": "Search API"
+    }
+  ],
   "paths": {
     "/api/search": {
       "post": {
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "operationId": "search",
-        "summary": "Search for Github objects such as users",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "summary": "Search for Github objects such as users or reepositories",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "requestBody": {
           "content": {
@@ -94,9 +103,59 @@
           }
         }
       }
+    },
+    "/api/clear-cache": {
+      "delete": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "clearCache",
+        "summary": "Clear cached Github search results",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Cache cleared",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Confirmation"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid HTTP method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/ApiError"
+                },
+                "example": {
+                  "detail": "Allowed methods: DELETE"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Confirmation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "status": "ok"
+      }
+    },
     "SearchPayload": {
       "type": "object",
       "properties": {
@@ -105,7 +164,10 @@
         },
         "searchType": {
           "type": "string",
-          "enum": ["user", "repository"]
+          "enum": [
+            "user",
+            "repository"
+          ]
         }
       },
       "example": {
