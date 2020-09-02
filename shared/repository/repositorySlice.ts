@@ -9,4 +9,4 @@ export const {
   addSearchResult,
 } = repositorySlice.actions;
 
-export default repositorySlice.reducer;
+export const RepositoryReducer = repositorySlice.reducer;

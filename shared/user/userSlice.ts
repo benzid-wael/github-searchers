@@ -10,4 +10,4 @@ export const {
 } = userSlice.actions;
 
 
-export default userSlice.reducer;
+export const UserReducer = userSlice.reducer;
