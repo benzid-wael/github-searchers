@@ -8,8 +8,7 @@
     "start": "next start",
     "type-check": "tsc",
     "test": "jest --watch --coverage --verbose --silent=false",
-    "test:ci": "jest --ci",
-    "now-build": "yarn run test:ci"
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
