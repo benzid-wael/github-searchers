@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from "react-redux";
+
 import { resetSearch, search } from '../shared/search/searchSlice';
 import { MINIMUM_SEARCH_TERM_LENGTH } from '../shared/config';
+import UseDebouncedCallback from '../utils/frontend/debounce';
+
 import styled from 'styled-components';
 
 
@@ -31,7 +34,7 @@ const Select = styled.select`
   width: 116px;
   border: .5px solid #cecece;
   color: gray;
-  font-size: 12px;  
+  font-size: 12px;
   font-weight: 400;
   /* remove default arrow */
   -webkit-appearance: none;
@@ -62,6 +65,12 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export const Search: React.FC<PropsFromRedux> = (props) => {
   const [searchQuery, setSearchQuery] = useState<{searchText: string, searchType: string}>({searchText: "", searchType: "user"});
 
+  const performSearch = UseDebouncedCallback((payload) => {
+    // Based on Doherty Research paper, a debounce of 400ms is a good start.
+    // We can adjust the waiting time late, once we have a better understanding of our users
+    props.search(payload);
+  }, 400);
+
   const startSearchingIfPossible = (searchQuery) => {
     const searchText = searchQuery.searchText;
     const query = {
@@ -69,7 +78,7 @@ export const Search: React.FC<PropsFromRedux> = (props) => {
       searchType: searchQuery.searchType,
     };
     if (searchText.length >= MINIMUM_SEARCH_TERM_LENGTH) {
-      props.search(query);
+      performSearch(searchQuery);
     } else {
       props.resetSearch(query);
     }

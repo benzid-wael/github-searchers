@@ -2,6 +2,7 @@ import { TedisPool } from 'tedis';
 
 import { CACHE_MAX_CONN, CACHE_MIN_CONN } from '../../shared/config';
 
+
 export abstract class CacheStorage {
   constructor(protected host: string, protected port: number, protected options?: any) {
   }

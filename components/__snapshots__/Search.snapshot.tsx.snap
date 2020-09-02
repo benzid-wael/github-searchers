@@ -15,7 +15,7 @@ exports[`Search should render correctly 1`] = `
       placeholder="Start typing to search ..."
     />
     <select
-      className="sc-AxhCb gKnLwT"
+      className="sc-AxhCb jbXmYn"
       name="searchType"
       onChange={[Function]}
     >
