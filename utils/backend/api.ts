@@ -78,7 +78,7 @@ export const cache = ({ prefix, timeout, version }: { prefix: string, timeout?: 
     }
 
     descriptor.value = async (...args) => {
-      const cacheKey = `${prefix}:${version}:${args.map(arg => arg.toString()).join(':')}`
+      const cacheKey = `${prefix}:${version}:${args.map(arg => arg.toString()).join(':')}`.toLowerCase();
       const cacheStorage = new RedisCacheStorage(CACHE_HOST, CACHE_PORT);
       const cached = await cacheStorage.get(cacheKey);
 

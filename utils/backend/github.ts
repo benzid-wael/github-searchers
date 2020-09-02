@@ -17,8 +17,9 @@ interface PaginationMeta {
   last: number|null;
 }
 
-export interface MetaInfo extends PaginationMeta {
+export interface MetaInfo {
   total: number;
+  pagination: PaginationMeta;
 }
 
 interface GenericApiResponse extends PaginationMeta {
@@ -50,10 +51,12 @@ abstract class BaseGithubClient {
     return {
       meta: {
         total: response.total_count,
-        first: resp.first || null,
-        prev: resp.prev || null,
-        next: resp.next || null,
-        last: resp.last || null
+        pagination: {
+          first: resp.first || null,
+          prev: resp.prev || null,
+          next: resp.next || null,
+          last: resp.last || null
+        }
       },
       items: response.items.map(item => ({
         name: item.name,
@@ -89,10 +92,12 @@ abstract class BaseGithubClient {
     return {
       meta: {
         total: response.total_count,
-        first: resp.first || null,
-        prev: resp.prev || null,
-        next: resp.next || null,
-        last: resp.last || null
+        pagination: {
+          first: resp.first || null,
+          prev: resp.prev || null,
+          next: resp.next || null,
+          last: resp.last || null
+        }
       },
       items: users
     }
