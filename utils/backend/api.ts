@@ -64,9 +64,10 @@ export const apiResponse = (allowedMethods: HTTP_METHOD[], validator?: (payload:
  * @param   timeout   cache TTL
  * @param   version   cache's version
  */
-export const cache = ({ prefix, timeout, version }: { prefix: string, timeout?: number, version?: number }) => {
+export const cache = ({ prefix, timeout, version, enable }: { prefix: string, timeout?: number, version?: number, enable?: boolean }) => {
   timeout = timeout === undefined ? CACHE_TTL : timeout;
   version = version || 1;
+  const enabled = (enable === undefined ? true : enable);
 
   // @ts-ignore
   const wrapper = (target: any, propertyKey: string, descriptor: TypedPropertyDescriptor<(...params: any[]) => Promise<any>>) => {
@@ -75,6 +76,10 @@ export const cache = ({ prefix, timeout, version }: { prefix: string, timeout?: 
 
     if (!originalMethod) {
       throw new SyntaxError(`cache decorator supports only methods`);
+    }
+
+    if (!enabled) {
+      return originalMethod;
     }
 
     descriptor.value = async (...args) => {

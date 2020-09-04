@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner Spinner with text should render correctly 1`] = `
+<span
+  className="sc-AxjAm hdmjYu"
+>
+  loading...
+</span>
+`;
+
+exports[`Spinner Spinner without text should render correctly 1`] = `
+<span
+  className="sc-AxjAm hdmjYu"
+/>
+`;

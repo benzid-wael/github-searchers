@@ -1,6 +1,6 @@
 import { TedisPool } from 'tedis';
 
-import { handler } from './clear-cache';
+import { handler } from '../../pages/api/clear-cache';
 import { CACHE_HOST, CACHE_PORT } from '../../shared/config';
 import { RedisCacheStorage } from '../../utils/backend/cache';
 import { mockRequest, mockResponse } from "../../utils/testing";

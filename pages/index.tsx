@@ -4,10 +4,11 @@ import styled, {CSSProperties} from 'styled-components';
 
 import Card from "../components/Card";
 import FlexGrid from '../components/FlexGrid';
-import User from '../components/User';
-import Repository from '../components/Repository';
 import Layout from '../components/Layout';
+import Repository from '../components/Repository';
 import Search from '../components/Search';
+import Spinner from '../components/Spinner';
+import User from '../components/User';
 
 import './index.css'
 
@@ -40,34 +41,6 @@ const Hint = styled.h3`
   font-weight: 200;
 `;
 
-const Loader = styled.span`
-  position: relative;
-  display: inline-block;
-  text-align: center;
-  width: 120px;
-  height: 24px;
-  left: calc(30% - 120px);
-  margin: 16px;
-  overflow: hidden;
-  line-height: 1.5em;
-  font-size: 18px;
-  font-weight: 400;
-  
-  &::after {
-    display: inline-table;
-    white-space: pre;
-    content: "🕐\\A🕑\\A🕒\\A🕓\\A🕔\\A🕕\\A🕖\\A🕗\\A🕘\\A🕙\\A🕚\\A🕛";
-    animation: spin12 3s steps(12) infinite;
-    width: 1.5em;
-  }
-  
-  @keyframes spin12 {
-    to {
-      transform: translateY(-18.0em);
-    }
-  }
-`;
-
 
 const mapStateToProps = (state) => ({
   search: state.search,
@@ -86,7 +59,7 @@ const SearchResult = (searchType, result) => {
 };
 
 
-const IndexPage: React.FC<PropsFromRedux> = (props) => {
+export const IndexPage: React.FC<PropsFromRedux> = (props) => {
   const [searchState, setSearchState] = useState("initial");
 
   useEffect(() => {
@@ -107,7 +80,7 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
     <div style={searchState !== "loaded" ? initialStateStyle : { marginTop: "24px" }}>
       <div>
         <AppHeader>
-          <img src="/images/github.svg" style={{padding: "0 8px", width: "40px", height: "40px", marginTop: "-8px" }}/>
+          <img src="/images/github.svg" style={{padding: "0 4px", width: "48px", height: "48px", marginTop: "-4px" }}/>
           <Brand>
             <AppName>Gihub Searchers</AppName>
             <Hint>Search users or repositories below</Hint>
@@ -117,7 +90,7 @@ const IndexPage: React.FC<PropsFromRedux> = (props) => {
         <Search />
 
         {(searchState === "loaded" && props.search.searchResult) ? SearchResult(props.search.searchType, props.search.searchResult): "" }
-        {searchState === "loading" ? <Loader>Loading...</Loader> : ""}
+        {searchState === "loading" ? <Spinner text='Loading...' /> : ''}
       </div>
     </div>
 

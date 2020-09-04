@@ -2,34 +2,64 @@
 
 exports[`Search should render correctly 1`] = `
 <div
-  className="sc-AxjAm fDEmJb"
+  className="sc-AxirZ dqVvws"
 >
   <div
-    className="sc-AxirZ bZoKdN"
+    className="sc-AxiKw bWPqfZ"
   >
     <input
       autoComplete="off"
-      className="sc-AxiKw hreuoV"
+      className="sc-AxjAm UkMjT"
       name="text"
       onChange={[Function]}
       placeholder="Start typing to search ..."
     />
-    <select
-      className="sc-AxhCb jbXmYn"
-      name="searchType"
-      onChange={[Function]}
+    <div
+      className="custom-select-wrapper"
     >
-      <option
-        value="user"
+      <div
+        className="custom-select"
       >
-        Users
-      </option>
-      <option
-        value="repository"
-      >
-        Repositories
-      </option>
-    </select>
+        <div
+          className="custom-select__trigger"
+          onClick={[Function]}
+        >
+          <span>
+            user
+          </span>
+          <div
+            className="arrow"
+          />
+        </div>
+        <div
+          className="custom-options"
+        >
+          <span
+            className="custom-option"
+            data-value="user"
+            onClick={[Function]}
+          >
+            Users
+          </span>
+          <span
+            className="custom-option"
+            data-value="repository"
+            onClick={[Function]}
+          >
+            Repositories
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
+  <div
+    style={
+      Object {
+        "color": "red",
+        "margin": "4px",
+        "textAlign": "center",
+      }
+    }
+  />
 </div>
 `;

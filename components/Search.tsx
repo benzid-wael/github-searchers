@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from "react-redux";
 
+import Dropdown from './Dropdown';
+import Input from './Input';
 import { resetSearch, search } from '../shared/search/searchSlice';
 import { MINIMUM_SEARCH_TERM_LENGTH } from '../shared/config';
 import UseDebouncedCallback from '../utils/frontend/debounce';
@@ -18,34 +20,6 @@ const WrapperContainer = styled.div`
   align-items: first baseline;
 `;
 
-const InputText = styled.input`
-  height: 48px;
-  width: 33%;
-  min-width: 200px;
-  padding: 4px;
-  box-sizing: border-box;
-`;
-
-const Select = styled.select`
-  position: relative;
-  margin: 8px;
-  padding: 8px;
-  height: 48px;
-  width: 116px;
-  border: .5px solid #cecece;
-  color: gray;
-  font-size: 12px;
-  font-weight: 400;
-  /* remove default arrow */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: transparent url('/images/arrow_down.webp');
-  background-repeat: no-repeat;
-  background-position: right;
-  background-origin: content-box;
-`;
-
 
 const mapStateToProps = (state) => ({
     search: state.search,
@@ -53,7 +27,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return {
     resetSearch: (payload) => dispatch(resetSearch(payload)),
-    search: (payload) => dispatch(search(payload)),
+    performSearch: (payload) => dispatch(search(payload)),
   }
 };
 
@@ -68,7 +42,7 @@ export const Search: React.FC<PropsFromRedux> = (props) => {
   const performSearch = UseDebouncedCallback((payload) => {
     // Based on Doherty Research paper, a debounce of 400ms is a good start.
     // We can adjust the waiting time late, once we have a better understanding of our users
-    props.search(payload);
+    props.performSearch(payload);
   }, 400);
 
   const startSearchingIfPossible = (searchQuery) => {
@@ -84,36 +58,41 @@ export const Search: React.FC<PropsFromRedux> = (props) => {
     }
   };
 
-  const searchTextChanged = (e) => {
-    const value = e.target.value;
+  const searchTextChanged = (value) => {
     const newSearchQuery = {...searchQuery, searchText: value};
     setSearchQuery(newSearchQuery);
     startSearchingIfPossible(newSearchQuery);
   };
 
-  const searchTypeChanged = (e) => {
-    const value = e.target.value;
+  const searchTypeChanged = (option) => {
+    const value = option.value;
     const newSearchQuery = {...searchQuery, searchType: value};
     setSearchQuery(newSearchQuery);
     startSearchingIfPossible(newSearchQuery);
   };
 
+  const searchTypes = [
+    { value: 'user', label: 'Users' },
+    { value: 'repository', label: 'Repositories' },
+  ];
+
   return <MainContainer>
     <WrapperContainer>
-      <InputText
+      <Input
         name="text"
-        autoComplete="off"
+        autoComplete={false}
         placeholder="Start typing to search ..."
         onChange={searchTextChanged}
       />
-      <Select
-        name="searchType"
+
+      <Dropdown
+        name='searchType'
+        selected='user'
+        options={searchTypes}
         onChange={searchTypeChanged}
-      >
-        <option value="user">Users</option>
-        <option value="repository">Repositories</option>
-      </Select>
+      />
     </WrapperContainer>
+    <div style={{ color: 'red', margin: '4px', textAlign: 'center' }}>{props.search?.error}</div>
   </MainContainer>
 };
 
