@@ -81,12 +81,7 @@ return "Calls " .. calls .. " Dels " .. dels
       0,
       `${prefix}${seperator}*`,
     ];
-    try {
-      return await client.command(...command);
-    } catch (err) {
-      console.error(`Oops! cannot delete keys: ${err.toString()}`)
-      return err.toString();
-    }
+    return await client.command(...command);
   }
 
   async del(key: string) {

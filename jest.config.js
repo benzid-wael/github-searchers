@@ -5,6 +5,7 @@ module.exports = {
     '<rootDir>/shared',
     '<rootDir>/store',
     '<rootDir>/utils',
+    '<rootDir>/__tests__',
   ],
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx)',

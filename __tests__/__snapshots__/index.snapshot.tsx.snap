@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexPage should render on initial state: indexpage-initial 1`] = `
+<div>
+  <div
+    className="sc-AxhUy jZpCAT"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "verticalAlign": "middle",
+        }
+      }
+    >
+      <div>
+        <header
+          className="sc-fznyAO knaQiQ"
+        >
+          <img
+            src="/images/github.svg"
+            style={
+              Object {
+                "height": "48px",
+                "marginTop": "-4px",
+                "padding": "0 4px",
+                "width": "48px",
+              }
+            }
+          />
+          <div
+            className="sc-fznKkj dXJZUZ"
+          >
+            <h1
+              className="sc-fznZeY kkymqc"
+            >
+              Gihub Searchers
+            </h1>
+            <h3
+              className="sc-fzokOt ieIhLB"
+            >
+              Search users or repositories below
+            </h3>
+          </div>
+        </header>
+        <div
+          className="sc-fzoLsD gdXpxU"
+        >
+          <div
+            className="sc-fzpans kXNqgt"
+          >
+            <input
+              autoComplete="off"
+              className="sc-fzozJi bTtMmK"
+              name="text"
+              onChange={[Function]}
+              placeholder="Start typing to search ..."
+            />
+            <div
+              className="custom-select-wrapper"
+            >
+              <div
+                className="custom-select"
+              >
+                <div
+                  className="custom-select__trigger"
+                  onClick={[Function]}
+                >
+                  <span>
+                    user
+                  </span>
+                  <div
+                    className="arrow"
+                  />
+                </div>
+                <div
+                  className="custom-options"
+                >
+                  <span
+                    className="custom-option"
+                    data-value="user"
+                    onClick={[Function]}
+                  >
+                    Users
+                  </span>
+                  <span
+                    className="custom-option"
+                    data-value="repository"
+                    onClick={[Function]}
+                  >
+                    Repositories
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "color": "red",
+                "margin": "4px",
+                "textAlign": "center",
+              }
+            }
+          />
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`IndexPage should render on loaded state: indexpage-loaded 1`] = `
+<div>
+  <div
+    className="sc-AxhUy jZpCAT"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "verticalAlign": "middle",
+        }
+      }
+    >
+      <div>
+        <header
+          className="sc-fznyAO knaQiQ"
+        >
+          <img
+            src="/images/github.svg"
+            style={
+              Object {
+                "height": "48px",
+                "marginTop": "-4px",
+                "padding": "0 4px",
+                "width": "48px",
+              }
+            }
+          />
+          <div
+            className="sc-fznKkj dXJZUZ"
+          >
+            <h1
+              className="sc-fznZeY kkymqc"
+            >
+              Gihub Searchers
+            </h1>
+            <h3
+              className="sc-fzokOt ieIhLB"
+            >
+              Search users or repositories below
+            </h3>
+          </div>
+        </header>
+        <div
+          className="sc-fzoLsD gdXpxU"
+        >
+          <div
+            className="sc-fzpans kXNqgt"
+          >
+            <input
+              autoComplete="off"
+              className="sc-fzozJi bTtMmK"
+              name="text"
+              onChange={[Function]}
+              placeholder="Start typing to search ..."
+            />
+            <div
+              className="custom-select-wrapper"
+            >
+              <div
+                className="custom-select"
+              >
+                <div
+                  className="custom-select__trigger"
+                  onClick={[Function]}
+                >
+                  <span>
+                    user
+                  </span>
+                  <div
+                    className="arrow"
+                  />
+                </div>
+                <div
+                  className="custom-options"
+                >
+                  <span
+                    className="custom-option"
+                    data-value="user"
+                    onClick={[Function]}
+                  >
+                    Users
+                  </span>
+                  <span
+                    className="custom-option"
+                    data-value="repository"
+                    onClick={[Function]}
+                  >
+                    Repositories
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "color": "red",
+                "margin": "4px",
+                "textAlign": "center",
+              }
+            }
+          />
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`IndexPage should render on loading state: indexpage-loading 1`] = `
+<div>
+  <div
+    className="sc-AxhUy jZpCAT"
+  >
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "verticalAlign": "middle",
+        }
+      }
+    >
+      <div>
+        <header
+          className="sc-fznyAO knaQiQ"
+        >
+          <img
+            src="/images/github.svg"
+            style={
+              Object {
+                "height": "48px",
+                "marginTop": "-4px",
+                "padding": "0 4px",
+                "width": "48px",
+              }
+            }
+          />
+          <div
+            className="sc-fznKkj dXJZUZ"
+          >
+            <h1
+              className="sc-fznZeY kkymqc"
+            >
+              Gihub Searchers
+            </h1>
+            <h3
+              className="sc-fzokOt ieIhLB"
+            >
+              Search users or repositories below
+            </h3>
+          </div>
+        </header>
+        <div
+          className="sc-fzoLsD gdXpxU"
+        >
+          <div
+            className="sc-fzpans kXNqgt"
+          >
+            <input
+              autoComplete="off"
+              className="sc-fzozJi bTtMmK"
+              name="text"
+              onChange={[Function]}
+              placeholder="Start typing to search ..."
+            />
+            <div
+              className="custom-select-wrapper"
+            >
+              <div
+                className="custom-select"
+              >
+                <div
+                  className="custom-select__trigger"
+                  onClick={[Function]}
+                >
+                  <span>
+                    user
+                  </span>
+                  <div
+                    className="arrow"
+                  />
+                </div>
+                <div
+                  className="custom-options"
+                >
+                  <span
+                    className="custom-option"
+                    data-value="user"
+                    onClick={[Function]}
+                  >
+                    Users
+                  </span>
+                  <span
+                    className="custom-option"
+                    data-value="repository"
+                    onClick={[Function]}
+                  >
+                    Repositories
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "color": "red",
+                "margin": "4px",
+                "textAlign": "center",
+              }
+            }
+          />
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Dropdownshould render correctly when selected is missing: without-selected-option 1`] = `
+<div
+  className="custom-select-wrapper"
+>
+  <div
+    className="custom-select"
+  >
+    <div
+      className="custom-select__trigger"
+      onClick={[Function]}
+    >
+      <span>
+        
+      </span>
+      <div
+        className="arrow"
+      />
+    </div>
+    <div
+      className="custom-options"
+    >
+      <span
+        className="custom-option"
+        data-value="Ali"
+        onClick={[Function]}
+      >
+        Ali
+      </span>
+      <span
+        className="custom-option"
+        data-value="Ahmed"
+        onClick={[Function]}
+      >
+        Ahmed
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Dropdown Dropdownshould render correctly when selected is provided: with-selected-option 1`] = `
+<div
+  className="custom-select-wrapper"
+>
+  <div
+    className="custom-select"
+  >
+    <div
+      className="custom-select__trigger"
+      onClick={[Function]}
+    >
+      <span>
+        Ali
+      </span>
+      <div
+        className="arrow"
+      />
+    </div>
+    <div
+      className="custom-options"
+    >
+      <span
+        className="custom-option selected"
+        data-value="Ali"
+        onClick={[Function]}
+      >
+        Ali
+      </span>
+      <span
+        className="custom-option"
+        data-value="Ahmed"
+        onClick={[Function]}
+      >
+        Ahmed
+      </span>
+    </div>
+  </div>
+</div>
+`;
