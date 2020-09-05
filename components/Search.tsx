@@ -59,7 +59,7 @@ export const Search: React.FC<PropsFromRedux> = (props) => {
   };
 
   const searchTextChanged = (value) => {
-    const newSearchQuery = {...searchQuery, searchText: value};
+    const newSearchQuery = {...searchQuery, searchText: value.toLowerCase()};
     setSearchQuery(newSearchQuery);
     startSearchingIfPossible(newSearchQuery);
   };

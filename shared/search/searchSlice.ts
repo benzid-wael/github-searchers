@@ -5,12 +5,12 @@ import Repository from '../../shared/repository/repository';
 import { addSearchResult as addRepositorySearchResult } from '../../shared/repository/repositorySlice';
 import User from '../../shared/user/user';
 import { addSearchResult as addUserSearchResult } from '../../shared/user/userSlice';
-import { AppThunk } from "../../store/store";
+import { AppThunk, persistor } from '../../store/store';
 import { SearchResult } from '../../utils/backend/github';
-import { GithubSearcherAPI } from "../../utils/frontend/GithubSearcherAPI";
+import { GithubSearcherAPI } from '../../utils/frontend/GithubSearcherAPI';
 
 
-export type SearchType = "user" | "repository";
+export type SearchType = 'user' | 'repository';
 
 export interface SearchQueryPayload {
   searchType: SearchType;
@@ -19,16 +19,16 @@ export interface SearchQueryPayload {
 
 
 let initialState: Search = {
-  searchText: "",
-  searchType: "user",
-  state: "initial",
+  searchText: '',
+  searchType: 'user',
+  state: 'initial',
   searchResult: null,
   error: null,
 };
 
 
 const searchSlice = createSlice({
-  name: "SearchSlice",
+  name: 'SearchSlice',
   initialState,
   reducers: {
     resetSearch(state, action: PayloadAction<SearchQueryPayload>) {
@@ -37,7 +37,7 @@ const searchSlice = createSlice({
         ...state,
         searchText: payload.searchText,
         searchType: payload.searchType,
-        state: "initial",
+        state: 'initial',
         searchResult: null,
         error: null,
       }
@@ -48,7 +48,7 @@ const searchSlice = createSlice({
         ...state,
         searchText: payload.searchText,
         searchType: payload.searchType,
-        state: "loading",
+        state: 'loading',
         searchResult: null,
         error: null,
       }
@@ -56,14 +56,14 @@ const searchSlice = createSlice({
     searchResultLoaded(state, action: PayloadAction<SearchResult<User> | SearchResult<Repository>>) {
       return {
         ...state,
-        state: "loaded",
+        state: 'loaded',
         searchResult: action.payload
       }
     },
     searchResultFailed(state, action: PayloadAction<string>) {
       return {
         ...state,
-        state: "failed",
+        state: 'failed',
         error: action.payload
       }
     }
@@ -79,39 +79,53 @@ export const {
 } = searchSlice.actions;
 
 
-export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, getState)  => {
-  dispatch(startSearching(query));
-  try {
+export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, getState) => {
+  const loadFromAPI = async (query: SearchQueryPayload) => {
     const client = new GithubSearcherAPI();
     const response = await client.search(query);
-    if(query.searchType === "user") {
+    if (query.searchType === 'user') {
       // Update search result
       dispatch(addUserSearchResult({
         searchText: query.searchText,
         result: response
       }));
-      // Todo persist search result
     } else {
       // Update search result
       dispatch(addRepositorySearchResult({
         searchText: query.searchText,
         result: response
       }));
-      // Todo persist search result
+    }
+
+    return response;
+  }
+
+  const loadFromStore = (query: SearchQueryPayload) => {
+    const searchHistory = query.searchType === 'user' ? getState().user : getState().repository;
+    return searchHistory[query.searchText];
+  }
+
+  dispatch(startSearching(query));
+  try {
+    let response = loadFromStore(query);
+    if (!response) {
+      response = await loadFromAPI(query);
+
+      // persist store
+      persistor.persist();
     }
 
     // Update search result only if it match the latest request
-    const currentSearchState = getState().search;
+    const currentSearchState = <Search>getState().search;
     if(currentSearchState.searchText == query.searchText && currentSearchState.searchType == query.searchType) {
       dispatch(searchResultLoaded(response));
     } else {
-      console.warn("Outdated search result has been ignored");
+      console.warn('Outdated search result has been ignored');
     }
 
   } catch (e) {
     dispatch(searchResultFailed(e.message));
   }
 };
-
 
 export default searchSlice.reducer;

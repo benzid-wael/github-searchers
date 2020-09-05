@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiDoc should render correctly 1`] = `
+<div
+  className="swagger-ui"
+>
+  <div
+    className="loading-container"
+  >
+    <div
+      className="info"
+    >
+      <div
+        className="loading-container"
+      >
+        <div
+          className="loading"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
