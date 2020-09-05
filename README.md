@@ -33,6 +33,21 @@ $ yarn dev
 ```
 
 ## Solution
+The below diagram illustrate the overall architecture of the solution and describe a typical user interaction.
+
+![Architecture](doc/public/Architecture.jpg)
+
+When the user head to the website, the browser will download assets and start executing the javascript to initialize the app, which includes store initialization (step 1) and rehydaration, aka loading search history, (step 2). When the user initiate search request (step 3), the frontend will do the following:
+ S4. check if we have a search result matching the request
+ S5. If not, the frontend will hit the `/api/search`
+ S6. The backend will check if the result is already cached
+ S7. If nothing was found in the cache, the backend will fetch the result from Github (step 8)
+ S9. Then, it will cache the result for future request (by default, the result will be cached for 2h)
+ S10. The backend will process the result and return it to the frontend
+ S11. Frontend will update the related store `user` or `repository`
+ S12. Persist the store
+ S13. Visualize the returned serach results by updating the `search` state
+
 ### Backend
 The search api fetch results from github if and only if the result is not available in cache. This is achived by decorating the respective method with the `cache` decorator
 
@@ -41,16 +56,17 @@ The search api fetch results from github if and only if the result is not availa
 ### Frontend
 I created a generic `FlexGrid` to present the search results. This component is responsive and can work properly in different screens. Even this was not mentionned in the requirement, but I belive this is a better approach.
 
-Github serach results is stored is redux, under `user` or `repository` namespace. As the schema is the same, I created a generic slice maker.
+Github serach results is stored is redux, under `user` or `repository` states. As the schema is the same, I created a generic slice maker.
 
 #### Search Flow
 1. user initiate search
-2. Update `search` namespace with user query
-3.a. If the result is already cached, return it from the store
+2. Update `search` state with user query
+3.a. If the result is already cached (aka exists in the `user` or `repository` state), return it from the store
 3.b. Otherwise, fetch the data from the search API
-4. Once the backend respond, check the `search` state
-5. Update the related search result history, aka `user` or `repository` namespace
-6. If the response matches the latest search request, update the search result: `search` namespace
+1. Once the backend respond, check the `search` state
+2. Update the related search result history, aka `user` or `repository` states
+3. persist the store
+4. If the response matches the latest search request, update the search result: `search` state
 
 
 ## Features
@@ -68,6 +84,22 @@ Github serach results is stored is redux, under `user` or `repository` namespace
 6. Add support of dynamic cache key prefix to prevent clearing the cache using `delKeyStartsWith` method
 7. Using Github streaming API in the background, and feed search result from database
 8. Run unit tests as part of CI/CD, see this [issue](https://github.com/vercel/vercel/discussions/5140)
+
+
+## Configuration
+This application follow [12-factor-app](https://12factor.net/) methodology. Hence, you can configure it by updating environment variables.
+
+You can find below list of all supported environment variables
+
+|Name                   | Type        | Enum          | Default     | Description                   |
+|-----------------------|-------------|---------------|-------------|-------------------------------|
+|CACHE_HOST             | string      |               | "127.0.0.1" | Cache server host             |
+|CACHE_PORT             | number      |               | 6379        | Cache server port             |
+|CACHE_TTL              | number      |               | 6379        | Default TTL for cached values |
+|USE_GITHUB_FAKE_CLIENT | boolean     | "on" / "off"  | false       | Cache server port             |
+
+
+For further details about availables configuration check <a href="github-searchers/shared/config.ts">shared/config.ts</a>
 
 
 ## Known Bugs

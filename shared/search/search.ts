@@ -3,7 +3,7 @@ import User from '../user/user';
 import Repository from '../repository/repository';
 
 
-export type SearchStatus = "initial" | "loading" | "loaded" | "failed";
+export type SearchStatus = 'initial' | 'loading' | 'loaded' | 'failed';
 
 
 export default interface Search {

@@ -6,9 +6,9 @@ import { UserReducer } from '../shared/user/userSlice';
 
 
 const rootReducer = combineReducers({
+    repository: RepositoryReducer,
     search: SearchReducer,
     user: UserReducer,
-    repository: RepositoryReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

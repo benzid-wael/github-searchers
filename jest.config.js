@@ -29,6 +29,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   globals: {
     'ts-jest': {

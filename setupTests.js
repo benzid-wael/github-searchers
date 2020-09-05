@@ -11,8 +11,6 @@ import ReactDOM from 'react-dom';
 import Enzyme, { mount, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 
-import { render } from '@testing-library/react';
-
 import configureStore from 'redux-mock-store';
 import Adapter from 'enzyme-adapter-react-16';
 // import { Route, Switch, BrowserRouter } from 'react-router-dom';
@@ -92,9 +90,10 @@ global.logger = logger;
 const middlewares = [thunk];
 const initialState = {
   search: {
-    searchText: "",
-    searchType: "user",
-    state: "initial",
+    searchText: '',
+    searchType: 'user',
+    state: 'initial',
+    error: null,
   },
   user: {},
   repository: {}

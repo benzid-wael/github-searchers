@@ -10,7 +10,7 @@ import Search from '../components/Search';
 import Spinner from '../components/Spinner';
 import User from '../components/User';
 
-import './index.css'
+import './search.css'
 
 
 const AppHeader = styled.header`
