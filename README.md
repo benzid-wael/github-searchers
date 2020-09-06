@@ -97,7 +97,7 @@ You can find below list of all supported environment variables
 |CACHE_HOST             | string      |               | "127.0.0.1" | Cache server host             |
 |CACHE_PORT             | number      |               | 6379        | Cache server port             |
 |CACHE_TTL              | number      |               | 6379        | Default TTL for cached values |
-|USE_GITHUB_FAKE_CLIENT | boolean     | "on" / "off"  | false       | Cache server port             |
+|USE_GITHUB_FAKE_CLIENT | boolean     | "on" / "off"  | false       | use dummy github client        |
 
 
 For further details about availables configuration check <a href="shared/config.ts">shared/config.ts</a>
