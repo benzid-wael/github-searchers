@@ -38,16 +38,18 @@ The below diagram illustrate the overall architecture of the solution and descri
 
 ![Architecture](doc/public/Architecture.jpg)
 
-When the user head to the website, the browser will download assets and start executing the javascript to initialize the app, which includes store initialization (step 1) and rehydaration, aka loading search history, (step 2). When the user initiate search request (step 3), the frontend will do the following:
- S4. check if we have a search result matching the request
- S5. If not, the frontend will hit the `/api/search`
- S6. The backend will check if the result is already cached
- S7. If nothing was found in the cache, the backend will fetch the result from Github (step 8)
- S9. Then, it will cache the result for future request (by default, the result will be cached for 2h)
- S10. The backend will process the result and return it to the frontend
- S11. Frontend will update the related store `user` or `repository`
- S12. Persist the store
- S13. Visualize the returned serach results by updating the `search` state
+When the user head to the website, the browser will download assets and start executing the javascript to initialize the app, which includes store initialization (step 1) and rehydaration, aka loading search history, (step 2).
+
+When the user initiate search request (step 3), the frontend will do the following:
+ 1. check if we have a search result matching the request (step 4)
+ 1. If not, the frontend will hit the `/api/search` (step 5)
+ 1. The backend will check if the result is already cached (step 6)
+ 1. If nothing was found in the cache (step 7), the backend will fetch the result from Github (step 8)
+ 1. Then, it will cache the result for future request. By default, the result will be cached for 2h (step 9)
+ 1. The backend will process the result and return it to the frontend (step 10)
+ 1. Frontend will update the related store `user` or `repository` (step 11)
+ 1. Persist the store (step 12)
+ 1. Visualize the returned serach results by updating the `search` state (step 13)
 
 ### Backend
 The search api fetch results from github if and only if the result is not available in cache. This is achived by decorating the respective method with the `cache` decorator
@@ -61,30 +63,28 @@ Github serach results is stored is redux, under `user` or `repository` states. A
 
 #### Search Flow
 1. user initiate search
-2. Update `search` state with user query
-3.a. If the result is already cached (aka exists in the `user` or `repository` state), return it from the store
-3.b. Otherwise, fetch the data from the search API
+1. Update `search` state with user query
+1. If the result is already cached (aka exists in the `user` or `repository` state), return it from the store
+1. Otherwise, fetch the data from the search API
 1. Once the backend respond, check the `search` state
-2. Update the related search result history, aka `user` or `repository` states
-3. persist the store
-4. If the response matches the latest search request, update the search result: `search` state
+1. Update the related search result history, aka `user` or `repository` states
+1. persist the store
+1. If the response matches the latest search request, update the search result: `search` state
 
 
 ## Features
 ### Done
 - Integration with Github Search API
 - Search Results are cached for 2h by default, you can customize by updating `CACHE_TTL` environment variable
-- Supported Github entities: users and repositories
+- Supported Github entities: `users` and `repositories`
+- Persist search results in local storage using `redux-persist`
 
 ### TODO
-1. Persist search results in local storage using `redux-persist`
-2. Extract loader to its own component
-3. Add support for pagination
-4. Support other Github entities
-5. Improve interface for `apiResponse` middleware
-6. Add support of dynamic cache key prefix to prevent clearing the cache using `delKeyStartsWith` method
-7. Using Github streaming API in the background, and feed search result from database
-8. Run unit tests as part of CI/CD, see this [issue](https://github.com/vercel/vercel/discussions/5140)
+1. Add support for pagination
+2. Support other Github entities
+3. Improve interface for `apiResponse` middleware
+4. Add support of dynamic cache key prefix to prevent clearing the cache using `delKeyStartsWith` method
+5. Run unit tests as part of CI/CD, see this [issue](https://github.com/vercel/vercel/discussions/5140)
 
 
 ## Configuration
@@ -100,7 +100,7 @@ You can find below list of all supported environment variables
 |USE_GITHUB_FAKE_CLIENT | boolean     | "on" / "off"  | false       | Cache server port             |
 
 
-For further details about availables configuration check <a href="github-searchers/shared/config.ts">shared/config.ts</a>
+For further details about availables configuration check <a href="shared/config.ts">shared/config.ts</a>
 
 
 ## Known Bugs
