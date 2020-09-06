@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { SearchReducer } from '../shared/search/searchSlice';
 import { RepositoryReducer } from '../shared/repository/repositorySlice';
+import SearchReducer from '../shared/search/searchSlice';
 import { UserReducer } from '../shared/user/userSlice';
 
 
