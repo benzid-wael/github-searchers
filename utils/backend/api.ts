@@ -75,9 +75,9 @@ export const cache = ({
     version = version || 1;
     const enabled = enable === undefined ? true : enable;
 
-    // @ts-ignore
     const wrapper = (
         target: any,
+        // @ts-ignore
         propertyKey: string,
         descriptor: TypedPropertyDescriptor<(...params: any[]) => Promise<any>>,
     ) => {
