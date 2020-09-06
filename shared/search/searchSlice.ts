@@ -69,6 +69,7 @@ const searchSlice = createSlice({
 
 export const { resetSearch, startSearching, searchResultLoaded, searchResultFailed } = searchSlice.actions;
 
+
 export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, getState) => {
     const loadFromAPI = async (query: SearchQueryPayload) => {
         const client = new GithubSearcherAPI();
@@ -121,4 +122,4 @@ export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, 
     }
 };
 
-export default searchSlice.reducer;
+export const SearchReducer = searchSlice.reducer;

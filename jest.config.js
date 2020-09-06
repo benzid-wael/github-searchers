@@ -9,7 +9,7 @@ module.exports = {
   ],
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx)',
-    '**/?(*.)+(spec|snapshot).+(ts|tsx)'
+    '**/?(*.)+(spec|snapshot|supertest).+(ts|tsx)'
   ],
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
