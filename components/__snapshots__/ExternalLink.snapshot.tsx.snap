@@ -2,7 +2,7 @@
 
 exports[`ExternalLink should render correctly ExternalLink without custom styles: with-custom-style 1`] = `
 <a
-  className="sc-AxjAm lnbIcq"
+  className="sc-AxjAm kebPqi"
   href="https://github-searchers.vercel.app"
   style={
     Object {
@@ -17,7 +17,7 @@ exports[`ExternalLink should render correctly ExternalLink without custom styles
 
 exports[`ExternalLink should render correctly ExternalLink without custom styles: without-custom-style 1`] = `
 <a
-  className="sc-AxjAm lnbIcq"
+  className="sc-AxjAm kebPqi"
   href="https://github-searchers.vercel.app"
   target="_blank"
 >

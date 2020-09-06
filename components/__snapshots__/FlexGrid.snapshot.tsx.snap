@@ -2,26 +2,26 @@
 
 exports[`FlexGrid should render correctly Empty FlexGrid: empty-flexgtid 1`] = `
 <div
-  className="sc-AxiKw cydMkg"
+  className="sc-AxiKw bOTXee"
 >
   <div
-    className="sc-AxhCb ctdKxn"
+    className="sc-AxhCb iAeEKj"
   />
 </div>
 `;
 
 exports[`FlexGrid should render correctly FlexGrid with some cards: non-empty-flexgrid 1`] = `
 <div
-  className="sc-AxiKw cydMkg"
+  className="sc-AxiKw bOTXee"
 >
   <div
-    className="sc-AxhCb ctdKxn"
+    className="sc-AxhCb iAeEKj"
   >
     <div
       className="sc-AxjAm iEZjyM"
     >
       <div
-        className="sc-AxirZ kUTnFM"
+        className="sc-AxirZ fjSJiY"
       >
         First Card
       </div>
@@ -30,7 +30,7 @@ exports[`FlexGrid should render correctly FlexGrid with some cards: non-empty-fl
       className="sc-AxjAm iEZjyM"
     >
       <div
-        className="sc-AxirZ kUTnFM"
+        className="sc-AxirZ fjSJiY"
       >
         Second Card
       </div>
@@ -39,7 +39,7 @@ exports[`FlexGrid should render correctly FlexGrid with some cards: non-empty-fl
       className="sc-AxjAm iEZjyM"
     >
       <div
-        className="sc-AxirZ kUTnFM"
+        className="sc-AxirZ fjSJiY"
       >
         Third Card
       </div>

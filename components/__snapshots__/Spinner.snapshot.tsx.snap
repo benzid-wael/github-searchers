@@ -2,7 +2,7 @@
 
 exports[`Spinner Spinner with text should render correctly 1`] = `
 <span
-  className="sc-AxjAm hdmjYu"
+  className="sc-AxjAm bpLAqs"
 >
   loading...
 </span>
@@ -10,6 +10,6 @@ exports[`Spinner Spinner with text should render correctly 1`] = `
 
 exports[`Spinner Spinner without text should render correctly 1`] = `
 <span
-  className="sc-AxjAm hdmjYu"
+  className="sc-AxjAm bpLAqs"
 />
 `;

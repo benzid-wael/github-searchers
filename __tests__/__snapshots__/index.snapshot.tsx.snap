@@ -18,7 +18,7 @@ exports[`IndexPage should render on initial state: indexpage-initial 1`] = `
     >
       <div>
         <header
-          className="sc-fznyAO knaQiQ"
+          className="sc-fznyAO TXXmQ"
         >
           <img
             src="/images/github.svg"
@@ -32,29 +32,29 @@ exports[`IndexPage should render on initial state: indexpage-initial 1`] = `
             }
           />
           <div
-            className="sc-fznKkj dXJZUZ"
+            className="sc-fznKkj ciHJrx"
           >
             <h1
-              className="sc-fznZeY kkymqc"
+              className="sc-fznZeY sagzo"
             >
               Gihub Searchers
             </h1>
             <h3
-              className="sc-fzokOt ieIhLB"
+              className="sc-fzokOt flVoIh"
             >
               Search users or repositories below
             </h3>
           </div>
         </header>
         <div
-          className="sc-fzoLsD gdXpxU"
+          className="sc-fzoLsD fqEnxe"
         >
           <div
-            className="sc-fzpans kXNqgt"
+            className="sc-fzpans ehrHJF"
           >
             <input
               autoComplete="off"
-              className="sc-fzozJi bTtMmK"
+              className="sc-fzozJi czGshO"
               name="text"
               onChange={[Function]}
               placeholder="Start typing to search ..."
@@ -133,7 +133,7 @@ exports[`IndexPage should render on loaded state: indexpage-loaded 1`] = `
     >
       <div>
         <header
-          className="sc-fznyAO knaQiQ"
+          className="sc-fznyAO TXXmQ"
         >
           <img
             src="/images/github.svg"
@@ -147,29 +147,29 @@ exports[`IndexPage should render on loaded state: indexpage-loaded 1`] = `
             }
           />
           <div
-            className="sc-fznKkj dXJZUZ"
+            className="sc-fznKkj ciHJrx"
           >
             <h1
-              className="sc-fznZeY kkymqc"
+              className="sc-fznZeY sagzo"
             >
               Gihub Searchers
             </h1>
             <h3
-              className="sc-fzokOt ieIhLB"
+              className="sc-fzokOt flVoIh"
             >
               Search users or repositories below
             </h3>
           </div>
         </header>
         <div
-          className="sc-fzoLsD gdXpxU"
+          className="sc-fzoLsD fqEnxe"
         >
           <div
-            className="sc-fzpans kXNqgt"
+            className="sc-fzpans ehrHJF"
           >
             <input
               autoComplete="off"
-              className="sc-fzozJi bTtMmK"
+              className="sc-fzozJi czGshO"
               name="text"
               onChange={[Function]}
               placeholder="Start typing to search ..."
@@ -248,7 +248,7 @@ exports[`IndexPage should render on loading state: indexpage-loading 1`] = `
     >
       <div>
         <header
-          className="sc-fznyAO knaQiQ"
+          className="sc-fznyAO TXXmQ"
         >
           <img
             src="/images/github.svg"
@@ -262,29 +262,29 @@ exports[`IndexPage should render on loading state: indexpage-loading 1`] = `
             }
           />
           <div
-            className="sc-fznKkj dXJZUZ"
+            className="sc-fznKkj ciHJrx"
           >
             <h1
-              className="sc-fznZeY kkymqc"
+              className="sc-fznZeY sagzo"
             >
               Gihub Searchers
             </h1>
             <h3
-              className="sc-fzokOt ieIhLB"
+              className="sc-fzokOt flVoIh"
             >
               Search users or repositories below
             </h3>
           </div>
         </header>
         <div
-          className="sc-fzoLsD gdXpxU"
+          className="sc-fzoLsD fqEnxe"
         >
           <div
-            className="sc-fzpans kXNqgt"
+            className="sc-fzpans ehrHJF"
           >
             <input
               autoComplete="off"
-              className="sc-fzozJi bTtMmK"
+              className="sc-fzozJi czGshO"
               name="text"
               onChange={[Function]}
               placeholder="Start typing to search ..."
