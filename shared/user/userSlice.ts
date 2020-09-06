@@ -1,13 +1,8 @@
 import User from './user';
-import { makeSlice } from '../search/searchResultSlice'
+import { makeSlice } from '../search/searchResultSlice';
 
+const userSlice = makeSlice<User>('UserSlice');
 
-const userSlice = makeSlice<User>("UserSlice");
-
-
-export const {
-  addSearchResult,
-} = userSlice.actions;
-
+export const { addSearchResult } = userSlice.actions;
 
 export const UserReducer = userSlice.reducer;

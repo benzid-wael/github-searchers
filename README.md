@@ -7,6 +7,7 @@ The solution uses Github Search API to execute users' queries.
 
 ## Pre-requisite
 - redis `v6.0.6`
+- node `v12.16.2`
 
 
 ## Try it yourself

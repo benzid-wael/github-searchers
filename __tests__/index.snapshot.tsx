@@ -3,7 +3,6 @@ import * as React from 'react';
 import { IndexPage } from '../pages/index';
 import { render } from '../utils/testing/render';
 
-
 describe('IndexPage', () => {
     it.each`
         state
@@ -18,5 +17,5 @@ describe('IndexPage', () => {
         const tree = render(<IndexPage />, { initialState: initialState }).toJSON();
         // then
         expect(tree).toMatchSnapshot(`indexpage-${state}`);
-    })
-})
+    });
+});
