@@ -2,12 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import './Dropdown.css';
 
-
 export interface Option {
     label: string;
     value: any;
 }
-
 
 export interface SelectProps {
     name?: string;
@@ -31,13 +29,13 @@ const useOutsideAlerter = (ref, callback) => {
         }
 
         // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
             // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [ref]);
-}
+};
 
 export const Select = (props: SelectProps) => {
     const [open, setOpen] = useState(false);
@@ -49,28 +47,32 @@ export const Select = (props: SelectProps) => {
         setSelected(option.label);
         setOpen(false);
         props.onChange!(option);
-    }
+    };
 
-    return <div className="custom-select-wrapper" ref={wrapperRef}>
-        <div className={open ? 'custom-select open' : 'custom-select'}>
-            <div className="custom-select__trigger"
-                onClick={() => setOpen(!open)}
-            >
-                <span>{selected}</span>
-                <div className="arrow"></div>
-            </div>
-            <div className="custom-options">
-                {props.options.map((option, index) => {
-                    return <span key={`${props.name}-${option.label}-${index}`}
-                        className={selected === option.label ? 'custom-option selected' : 'custom-option'}
-                        data-value={option.value}
-                        onClick={() => selectOption(option)}
-                    >{option.label}</span>
-                })}
+    return (
+        <div className="custom-select-wrapper" ref={wrapperRef}>
+            <div className={open ? 'custom-select open' : 'custom-select'}>
+                <div className="custom-select__trigger" onClick={() => setOpen(!open)}>
+                    <span>{selected}</span>
+                    <div className="arrow"></div>
+                </div>
+                <div className="custom-options">
+                    {props.options.map((option, index) => {
+                        return (
+                            <span
+                                key={`${props.name}-${option.label}-${index}`}
+                                className={selected === option.label ? 'custom-option selected' : 'custom-option'}
+                                data-value={option.value}
+                                onClick={() => selectOption(option)}
+                            >
+                                {option.label}
+                            </span>
+                        );
+                    })}
+                </div>
             </div>
         </div>
-    </div>
-}
-
+    );
+};
 
 export default Select;

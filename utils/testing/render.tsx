@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-
 const InitialState = {
     search: {
         searchText: '',
@@ -13,28 +12,23 @@ const InitialState = {
         error: null,
     },
     user: {},
-    repository: {}
+    repository: {},
 };
-
 
 export const mockStore = (state?: any) => {
     const initialState = Object.assign({}, InitialState, state || {});
     const mockStoreFactory = configureStore([thunk]);
     return mockStoreFactory(initialState);
-}
+};
 
 // @ts-ignore
 const render = (component, { initialState } = {}) => {
     const store = mockStore(initialState);
 
-    return renderer.create(
-        <Provider store={store}>
-            {component}
-        </Provider>
-    )
-}
+    return renderer.create(<Provider store={store}>{component}</Provider>);
+};
 
 // re-export everything
-export * from '@testing-library/react'
+export * from '@testing-library/react';
 // override render method
-export { render }
+export { render };

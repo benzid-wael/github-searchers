@@ -1,9 +1,8 @@
 import some from 'lodash/some';
 
 export const stringToBool = (value: string) => {
-  return some(['true', 't', '1', 'on', 'enabled'], (val) => val === value.toLowerCase());
-}
-
+    return some(['true', 't', '1', 'on', 'enabled'], (val) => val === value.toLowerCase());
+};
 
 // Caching
 export const CACHE_ENGINE = process.env.CACHE_ENGINE || 'redis';
