@@ -14,7 +14,7 @@ exports[`Repository should render correctly 1`] = `
     }
   >
     <a
-      className="sc-AxjAm lnbIcq"
+      className="sc-AxjAm kebPqi"
       href="https://github.com/benzid-wael/github-searchers"
       target="_blank"
     >
@@ -135,7 +135,7 @@ exports[`Repository should render correctly 1`] = `
     </div>
   </div>
   <div
-    className="sc-AxirZ kEGBWq"
+    className="sc-AxirZ gxYVcO"
   >
     <img
       src="https://avatars0.githubusercontent.com/u/4288931?s=60&v=4"
@@ -149,7 +149,7 @@ exports[`Repository should render correctly 1`] = `
       }
     />
     <a
-      className="sc-AxjAm lnbIcq"
+      className="sc-AxjAm kebPqi"
       href="https://github.com/benzid-wael/"
       style={
         Object {

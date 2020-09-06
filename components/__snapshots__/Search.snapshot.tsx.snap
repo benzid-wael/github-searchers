@@ -2,14 +2,14 @@
 
 exports[`Search should render correctly 1`] = `
 <div
-  className="sc-AxirZ dqVvws"
+  className="sc-AxirZ ktnnZK"
 >
   <div
-    className="sc-AxiKw bWPqfZ"
+    className="sc-AxiKw faqseh"
   >
     <input
       autoComplete="off"
-      className="sc-AxjAm UkMjT"
+      className="sc-AxjAm kABhnn"
       name="text"
       onChange={[Function]}
       placeholder="Start typing to search ..."
