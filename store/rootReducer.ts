@@ -1,10 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import SearchReducer from '../shared/search/searchSlice';
+import { SearchReducer } from '../shared/search/searchSlice';
 import { RepositoryReducer } from '../shared/repository/repositorySlice';
 import { UserReducer } from '../shared/user/userSlice';
 
-const rootReducer = combineReducers({
+
+export const rootReducer = combineReducers({
     repository: RepositoryReducer,
     search: SearchReducer,
     user: UserReducer,
