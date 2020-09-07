@@ -1,4 +1,4 @@
-# Github searchers 
+# Github searchers
 
 This is my solution for [Tradeling](https://www.tradeling.com/) Full-stack [coding task](https://github.com/tradeling/coding-tasks/blob/develop/fullstack-javascript/readme.md)
 The goal is to build a SPA that allows users to search for specific users or repositories.
@@ -103,6 +103,10 @@ You can find below list of all supported environment variables
 For further details about availables configuration check <a href="shared/config.ts">shared/config.ts</a>
 
 
-## Known Bugs
-You can see list of all open issues [here](https://github.com/benzid-wael/github-searchers/issues/)
+## Issues
+### Design Issues
 
+- I was not able to fix the implementation of `GithubClient` due to time constraint. Typically this class should be splitted into three different classes `GithubApiFetcher` which should be responsible of communicating with Github Search API, and both `GithubUser` and `GithubRepository` classes should implement a `search` method in which they will be using the `GithubApiFetcher` class. This solution is more robust and aligned with SOLID principle. Furthermore, this will enable us to improve the implementation of search api handler, and unify implementation of `searchGithubUsers` and `searchGithubRepo`
+
+### Known bugs
+You can see list of all open issues [here](https://github.com/benzid-wael/github-searchers/issues/)
