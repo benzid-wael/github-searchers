@@ -8,10 +8,11 @@ The solution uses Github Search API to execute users' queries.
 ## Pre-requisite
 - redis `v6.0.6`
 - node `v12.16.2`
+- docker-compose
 
 
 ## Try it yourself
-This project is already deployed in the cloud using [Vercel](https://vercel.com)
+This project is already deployed in the cloud using [Vercel](https://vercel.com) (`recommended` for production)
 You can access latest version [here](https://github-searchers-vercel.app)
 
 P.S. This deployment is using fake github client for demo purpose. You need to install the project locally to see results from Github Search API. You can force using the real client by setting `GITHUB_USE_FAKE_CLIENT` to `0`
@@ -31,6 +32,12 @@ $ yarn
 Once all dependencies are installed, you can run the project using this command
 ```bash
 $ yarn dev
+```
+
+Sounds complicated?! use `docker-compose`:
+
+```bash
+$ docker-compose up
 ```
 
 ## Solution

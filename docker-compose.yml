@@ -1,9 +1,27 @@
-version: '3'
+version: '3.7'
 services:
+  nextjs:
+    build: .
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - nextjs
   redis:
     image: "redis:alpine"
-    ports:
-      - "6379:6379"
     volumes:
       - "./data:/data"
     command: redis-server --appendonly yes
+    networks:
+      default:
+        aliases:
+          - redis
+
+networks:
+  default:
