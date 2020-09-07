@@ -67,12 +67,9 @@ const searchSlice = createSlice({
     },
 });
 
-
 export const { resetSearch, startSearching, searchResultLoaded, searchResultFailed } = searchSlice.actions;
 
-
 export const SearchReducer = searchSlice.reducer;
-
 
 export const search = (query: SearchQueryPayload): AppThunk => async (dispatch, getState) => {
     const loadFromAPI = async (query: SearchQueryPayload) => {

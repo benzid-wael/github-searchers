@@ -61,7 +61,7 @@ const SearchResult = (searchType, result) => {
     );
 };
 
-export const IndexPage: React.FC<PropsFromRedux> = (props) => {
+export const IndexPage: React.FC<PropsFromRedux> = (props: PropsFromRedux) => {
     const [searchState, setSearchState] = useState('initial');
 
     useEffect(() => {

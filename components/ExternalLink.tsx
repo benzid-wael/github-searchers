@@ -17,7 +17,13 @@ const A = styled.a`
     }
 `;
 
-const ExternalLink: React.FC<{ url: string; label: string; style?: CSSProperties }> = ({ url, label, style }) => {
+export interface ExternalLinkProps {
+    url: string;
+    label: string;
+    style?: CSSProperties;
+}
+
+const ExternalLink: React.FC<ExternalLinkProps> = ({ url, label, style }: ExternalLinkProps) => {
     return (
         <A href={url} target="_blank" style={style}>
             {label}

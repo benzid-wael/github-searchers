@@ -12,7 +12,12 @@ const UserContainer = styled.div`
     justify-content: space-between;
 `;
 
-export const User: React.FC<{ data: UserModel; imgSize?: 'small' | 'large' }> = (props) => {
+export interface UserProps {
+    data: UserModel;
+    imgSize?: 'small' | 'large';
+}
+
+export const User: React.FC<UserProps> = (props: UserProps) => {
     const imgSize = props.imgSize || 'large';
     const user = props.data;
     const imgSizeInPixels = imgSize === 'small' ? 72 : 148;

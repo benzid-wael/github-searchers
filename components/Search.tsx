@@ -32,7 +32,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 // The inferred type will look like:
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export const Search: React.FC<PropsFromRedux> = (props) => {
+export const Search: React.FC<PropsFromRedux> = (props: PropsFromRedux) => {
     const [searchQuery, setSearchQuery] = useState<{ searchText: string; searchType: string }>({
         searchText: '',
         searchType: 'user',

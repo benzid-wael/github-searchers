@@ -21,7 +21,12 @@ const LabelContainer = styled.span`
     display: inline;
 `;
 
-export const Stats: React.FC<{ title: string; value: number }> = ({ title, value }) => {
+interface StatsProps {
+    title: string;
+    value: number;
+}
+
+export const Stats: React.FC<StatsProps> = ({ title, value }: StatsProps) => {
     return (
         <div style={{ margin: '8px' }}>
             <LabelContainer style={{ fontWeight: 500 }}>{title}</LabelContainer>
@@ -30,7 +35,11 @@ export const Stats: React.FC<{ title: string; value: number }> = ({ title, value
     );
 };
 
-export const Repository: React.FC<{ data: RepositoryModel }> = (props) => {
+export interface RepositoryProps {
+    data: RepositoryModel;
+}
+
+export const Repository: React.FC<RepositoryProps> = (props: RepositoryProps) => {
     const repo = props.data;
 
     return (
