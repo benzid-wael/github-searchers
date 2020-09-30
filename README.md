@@ -107,7 +107,7 @@ You can find below list of all supported environment variables
 |USE_GITHUB_FAKE_CLIENT | boolean     | "on" / "off"  | false       | use dummy github client        |
 
 
-For further details about availables configuration check <a href="shared/config.ts">shared/config.ts</a>
+For further details about availables configuration check <a href="shared/config.ts">Here/config.ts</a>
 
 
 ## Issues
