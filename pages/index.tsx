@@ -28,7 +28,7 @@ const Brand = styled.div`
 `;
 
 const AppName = styled.h1`
-    font-weight: 600;
+    font-weight: 605;
     font-size: 20px;
     margin: 0px;
 `;
