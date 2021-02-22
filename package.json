@@ -15,7 +15,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "@zeit/next-css": "^1.0.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "next": "latest",
     "next-redux-wrapper": "^6.0.2",
     "react": "^16.12.0",
