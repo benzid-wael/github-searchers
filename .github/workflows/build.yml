@@ -16,34 +16,19 @@ jobs:
 
     strategy:
       matrix:
-        deno: ["v1.x"]
         os: [ubuntu-latest]
 
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
 
-      - name: Setup Deno
-        # uses: denoland/setup-deno@v1
-        uses: denoland/setup-deno@4a4e59637fa62bd6c086a216c7e4c5b457ea9e79
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+          cmd: install # will run `yarn install` command
 
-      # Uncomment this step to verify the use of 'deno fmt' on each commit.
-      # - name: Verify formatting
-      #   run: deno fmt --check
-
-      # - name: Run linter
-      #   run: deno lint
-
-      # - name: Cache dependencies
-      #   run: deno cache deps.ts
-
-      - name: Run tests
-        run: deno test -A --unstable --coverage=coverage
-
-      - name: Generate Coverage Report
-        run: deno --unstable coverage ./coverage --lcov > coverage.lcov
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: test --coverage --mapCoverage --coverageDirectory coverage --ci --all --watchAll=false
 
       - name: SonarCloud Scan
         # You may pin to the exact commit or the version.
@@ -55,7 +40,7 @@ jobs:
           args:
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=github-searchers
-            -Dsonar.javascript.lcov.reportPaths=coverage.lcov
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.tests=__tests__/
             -Dsonar.verbose=true
         env:
