@@ -8,11 +8,7 @@
 
 name: SAST
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [*]
+on: [push, pull_request]
 
 jobs:
   test:
