@@ -8,7 +8,7 @@
 
 name: SAST
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -42,6 +42,7 @@ jobs:
             -Dsonar.projectKey=github-searchers
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.tests=__tests__/
+            -Dsonar.exclusions=node_modules/**/*, dist/**/*, coverage/**/*, **/*.test.*, *.config.{js,json}, __tests__/**/*, __mocks__/**/*, ./.*, *.xml, **/*.d.*, **/*.js
             -Dsonar.verbose=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
