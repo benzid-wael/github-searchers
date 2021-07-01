@@ -51,12 +51,13 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v1.6
         with:
           # Additional arguments to the sonarcloud scanner
-        args: >
-          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-          -Dsonar.projectKey=github-searchers
-          -Dsonar.javascript.lcov.reportPaths=coverage.lcov
-          -Dsonar.tests=__tests__/
-          -Dsonar.verbose=true
+          projectBaseDir: .
+          args:
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=github-searchers
+            -Dsonar.javascript.lcov.reportPaths=coverage.lcov
+            -Dsonar.tests=__tests__/
+            -Dsonar.verbose=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
