@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         deno: ["v1.x", "canary"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
+        os: [macOS-latest, ubuntu-latest]
 
     steps:
       - name: Setup repo
@@ -33,8 +33,8 @@ jobs:
       # - name: Verify formatting
       #   run: deno fmt --check
 
-      - name: Run linter
-        run: deno lint
+      # - name: Run linter
+      #   run: deno lint
 
       - name: Cache dependencies
         run: deno cache deps.ts
