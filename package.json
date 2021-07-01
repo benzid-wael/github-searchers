@@ -8,7 +8,7 @@
     "start": "next start",
     "type-check": "tsc",
     "test": "jest --watch --coverage --verbose --silent=false -runInBand --detectOpenHandles",
-    "test:ci": "jest --ci --coverage --coverageDirectory coverage --mapCoverage",
+    "test:ci": "jest --ci --coverage --coverageDirectory coverage",
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet",
     "fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix"
   },
