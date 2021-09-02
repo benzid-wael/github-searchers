@@ -13,7 +13,7 @@
     "fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.4.0",
+    "@reduxjs/toolkit": "^1.6.0",
     "@zeit/next-css": "^1.0.1",
     "lodash": "^4.17.20",
     "next": "10.0.0",
